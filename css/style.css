@@ -1,0 +1,1187 @@
+/* ===================================================================
+   PORTEKİZ WEB SİTESİ - MODERN PREMIUM STİL DOSYASI
+   Renk Paleti: Portekiz Bayrağı (Yeşil, Kırmızı, Altın Sarısı, Beyaz)
+   =================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --pt-green: #046A38;
+  --pt-green-dark: #024223;
+  --pt-green-light: #0d8a4d;
+  --pt-green-glow: rgba(4, 106, 56, 0.4);
+  --pt-red: #DA291C;
+  --pt-red-dark: #98170d;
+  --pt-red-light: #f03d2f;
+  --pt-red-glow: rgba(218, 41, 28, 0.4);
+  --pt-gold: #FFC400;
+  --pt-gold-light: #ffe082;
+  --pt-gold-dark: #c69200;
+  --pt-gold-glow: rgba(255, 196, 0, 0.4);
+  
+  --bg-dark: #070e0a;
+  --bg-card: rgba(14, 28, 20, 0.85);
+  --bg-card-hover: rgba(20, 42, 30, 0.95);
+  --border-color: rgba(255, 196, 0, 0.22);
+  --border-glow: rgba(255, 196, 0, 0.6);
+  
+  --text-main: #f5f7f6;
+  --text-muted: #b4c2b9;
+  --text-dim: #7d8f83;
+  
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --shadow-main: 0 10px 30px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 30px rgba(218, 41, 28, 0.2), 0 0 30px rgba(4, 106, 56, 0.2);
+  
+  --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  line-height: 1.65;
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* Dinamik Işıltılı Arka Plan */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: 
+    radial-gradient(circle at 10% 20%, rgba(4, 106, 56, 0.22) 0%, transparent 45%),
+    radial-gradient(circle at 90% 80%, rgba(218, 41, 28, 0.2) 0%, transparent 45%),
+    radial-gradient(circle at 50% 50%, rgba(255, 196, 0, 0.06) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ===================================================================
+   ÜST NAVİGASYON (HEADER & NAVBAR)
+   =================================================================== */
+.main-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(7, 14, 10, 0.94);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: 0 4px 25px rgba(0,0,0,0.5);
+}
+
+.nav-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: var(--text-main);
+  flex-shrink: 0;
+}
+
+.logo-flag-icon {
+  width: 38px;
+  height: 26px;
+  border-radius: 4px;
+  object-fit: cover;
+  box-shadow: 0 0 12px rgba(255, 196, 0, 0.5);
+  border: 1px solid rgba(255,255,255,0.25);
+  transition: var(--transition);
+}
+
+.logo-area:hover .logo-flag-icon {
+  transform: scale(1.1) rotate(-3deg);
+}
+
+.logo-text {
+  font-family: 'Cinzel', serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  background: linear-gradient(135deg, #fff 0%, var(--pt-gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* 10 Haftalık Menü */
+.nav-menu-wrapper {
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  padding: 0.25rem 0;
+}
+
+.nav-menu-wrapper::-webkit-scrollbar {
+  height: 4px;
+}
+.nav-menu-wrapper::-webkit-scrollbar-thumb {
+  background: var(--pt-green);
+  border-radius: 4px;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 0.4rem;
+  white-space: nowrap;
+}
+
+.nav-item a {
+  display: inline-block;
+  padding: 0.45rem 0.85rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+  border: 1px solid transparent;
+}
+
+.nav-item a:hover {
+  color: #fff;
+  background: rgba(4, 106, 56, 0.4);
+  border-color: rgba(255, 196, 0, 0.35);
+  transform: translateY(-2px);
+}
+
+.nav-item.active a {
+  color: #fff;
+  background: linear-gradient(135deg, var(--pt-green) 0%, var(--pt-red) 100%);
+  border-color: var(--pt-gold);
+  box-shadow: 0 3px 12px rgba(218, 41, 28, 0.4);
+}
+
+/* ===================================================================
+   HERO BÖLÜMÜ
+   =================================================================== */
+.hero-section {
+  position: relative;
+  padding: 4.5rem 1.5rem 3.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.hero-banner {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  align-items: center;
+  gap: 3rem;
+  background: linear-gradient(135deg, rgba(4, 106, 56, 0.32) 0%, rgba(218, 41, 28, 0.28) 100%);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 3.25rem;
+  box-shadow: var(--shadow-glow);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1.1rem;
+  background: rgba(255, 196, 0, 0.15);
+  border: 1px solid var(--pt-gold);
+  border-radius: 50px;
+  color: var(--pt-gold-light);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1.25rem;
+}
+
+.hero-title {
+  font-family: 'Cinzel', serif;
+  font-size: 3.1rem;
+  font-weight: 900;
+  line-height: 1.15;
+  margin-bottom: 1.25rem;
+}
+
+.hero-title span.green { color: #20e065; text-shadow: 0 0 20px rgba(32, 224, 101, 0.4); }
+.hero-title span.gold { color: var(--pt-gold); text-shadow: 0 0 20px rgba(255, 196, 0, 0.4); }
+.hero-title span.red { color: var(--pt-red-light); text-shadow: 0 0 20px rgba(240, 61, 47, 0.4); }
+
+.hero-desc {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+  max-width: 580px;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  cursor: pointer;
+  transition: var(--transition);
+  border: none;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--pt-green) 0%, var(--pt-green-light) 100%);
+  color: #fff;
+  border: 1px solid rgba(255, 196, 0, 0.4);
+  box-shadow: 0 4px 15px rgba(4, 106, 56, 0.4);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(4, 106, 56, 0.6);
+  border-color: var(--pt-gold);
+}
+
+.btn-secondary {
+  background: rgba(218, 41, 28, 0.25);
+  color: #fff;
+  border: 1px solid var(--pt-red);
+}
+
+.btn-secondary:hover {
+  background: var(--pt-red);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(218, 41, 28, 0.5);
+}
+
+.btn-gold {
+  background: linear-gradient(135deg, var(--pt-gold) 0%, #e5a800 100%);
+  color: #0b1510;
+  box-shadow: 0 4px 15px rgba(255, 196, 0, 0.4);
+}
+.btn-gold:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(255, 196, 0, 0.6);
+}
+
+.hero-flag-display {
+  position: relative;
+  text-align: center;
+}
+
+.flag-frame {
+  position: relative;
+  display: inline-block;
+  padding: 10px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, rgba(255, 196, 0, 0.4), rgba(255, 255, 255, 0.1));
+  box-shadow: 0 20px 45px rgba(0,0,0,0.8), 0 0 35px rgba(255, 196, 0, 0.3);
+  transition: var(--transition);
+}
+
+.flag-frame:hover {
+  transform: translateY(-4px) scale(1.02);
+}
+
+.hero-flag-img {
+  width: 100%;
+  max-width: 440px;
+  height: auto;
+  border-radius: var(--radius-sm);
+  display: block;
+}
+
+.flag-caption {
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--pt-gold-light);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* ===================================================================
+   GENEL BÖLÜM STİLLERİ
+   =================================================================== */
+.section {
+  max-width: 1400px;
+  margin: 4.5rem auto;
+  padding: 0 1.5rem;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  scroll-margin-top: 100px;
+}
+
+.section-subtitle {
+  color: var(--pt-gold);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+.section-title {
+  font-family: 'Cinzel', serif;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.75rem;
+}
+
+.section-desc {
+  max-width: 680px;
+  margin: 0 auto;
+  color: var(--text-muted);
+  font-size: 1.05rem;
+}
+
+/* ===================================================================
+   BÖLÜM 1: GENEL BİLGİLER & ETKİLEŞİMLİ ŞEHİR REHBERİ
+   =================================================================== */
+.facts-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+
+.fact-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.fact-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(to bottom, var(--pt-green), var(--pt-gold));
+  transition: var(--transition);
+}
+
+.fact-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  background: var(--bg-card-hover);
+  border-color: var(--border-glow);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.6), 0 0 20px rgba(4, 106, 56, 0.3);
+}
+
+.fact-card:hover::before {
+  width: 8px;
+  background: linear-gradient(to bottom, var(--pt-gold), var(--pt-red));
+}
+
+.fact-icon {
+  font-size: 2.2rem;
+  margin-bottom: 0.75rem;
+  transition: transform 0.3s ease;
+}
+
+.fact-card:hover .fact-icon {
+  transform: scale(1.15) rotate(5deg);
+}
+
+.fact-label {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+  font-weight: 600;
+}
+
+.fact-value {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0.25rem 0 0.5rem;
+}
+
+.fact-note {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* Şehir Filtresi ve Kültür Kartları */
+.city-filter-bar {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.city-filter-btn {
+  padding: 0.6rem 1.25rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 50px;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.city-filter-btn:hover, .city-filter-btn.active {
+  color: #fff;
+  background: linear-gradient(135deg, var(--pt-green) 0%, var(--pt-green-light) 100%);
+  border-color: var(--pt-gold);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(4, 106, 56, 0.4);
+}
+
+.culture-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.culture-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+}
+
+.culture-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--border-glow);
+  box-shadow: 0 16px 35px rgba(0,0,0,0.7);
+}
+
+.culture-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  transition: var(--transition);
+}
+
+.culture-card:hover .culture-img {
+  transform: scale(1.06);
+}
+
+.culture-body {
+  padding: 1.5rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.culture-tag {
+  align-self: flex-start;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--pt-gold);
+  background: rgba(255, 196, 0, 0.12);
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  margin-bottom: 0.75rem;
+}
+
+.culture-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.culture-text {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* ===================================================================
+   BÖLÜM 2: ETKİLEŞİMLİ PORTEKİZ BAYRAĞI İNCELEYİCİ
+   =================================================================== */
+.interactive-flag-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  box-shadow: var(--shadow-glow);
+  margin-bottom: 3.5rem;
+}
+
+.flag-interactive-viewport {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 2px solid var(--border-color);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.7);
+  background: #000;
+}
+
+.flag-interactive-viewport img {
+  width: 100%;
+  display: block;
+}
+
+/* Bayrak Üzerindeki Tıklanabilir Alanlar / Hotspots */
+.flag-hotspot {
+  position: absolute;
+  cursor: pointer;
+  border: 2px dashed rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.08);
+  transition: var(--transition);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flag-hotspot::after {
+  content: '🔍';
+  font-size: 1.2rem;
+  opacity: 0.6;
+  transition: var(--transition);
+}
+
+.flag-hotspot:hover, .flag-hotspot.active {
+  background: rgba(255, 196, 0, 0.25);
+  border-color: var(--pt-gold);
+  box-shadow: 0 0 20px var(--pt-gold);
+}
+
+.flag-hotspot:hover::after, .flag-hotspot.active::after {
+  opacity: 1;
+  transform: scale(1.3);
+}
+
+/* Hotspot Konumları */
+.hotspot-green {
+  top: 0; left: 0; width: 40%; height: 100%;
+}
+.hotspot-red {
+  top: 0; right: 0; width: 60%; height: 100%;
+}
+.hotspot-sphere {
+  top: 25%; left: 30%; width: 22%; height: 50%;
+  border-radius: 50%;
+}
+.hotspot-shield {
+  top: 32%; left: 34%; width: 14%; height: 36%;
+  border-radius: 8px;
+}
+
+/* İnteraktif Kart Detay Paneli */
+.flag-dynamic-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.flag-part-selector {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.part-btn {
+  padding: 0.5rem 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.part-btn:hover, .part-btn.active {
+  color: #fff;
+  border-color: var(--pt-gold);
+  background: linear-gradient(135deg, var(--pt-green) 0%, var(--pt-red) 100%);
+}
+
+.flag-detail-card {
+  background: rgba(7, 14, 10, 0.9);
+  border: 1px solid var(--pt-gold);
+  border-radius: var(--radius-md);
+  padding: 1.75rem;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  transition: var(--transition);
+}
+
+.flag-detail-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.45rem;
+  color: var(--pt-gold);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.flag-detail-text {
+  font-size: 0.95rem;
+  color: var(--text-main);
+  line-height: 1.65;
+}
+
+/* Bayrak Tarihçesi Akışı (Timeline) */
+.flag-history-box {
+  background: linear-gradient(135deg, rgba(4, 106, 56, 0.25), rgba(15, 30, 22, 0.9));
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+}
+
+.timeline {
+  position: relative;
+  margin-top: 2rem;
+  padding-left: 2rem;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 6px;
+  height: 100%;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--pt-gold), var(--pt-red));
+}
+
+.timeline-step {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.timeline-step:last-child {
+  margin-bottom: 0;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -2rem;
+  top: 4px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--pt-gold);
+  box-shadow: 0 0 10px var(--pt-gold);
+  border: 2px solid var(--bg-dark);
+}
+
+.timeline-year {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--pt-gold);
+  background: rgba(255, 196, 0, 0.15);
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  margin-bottom: 0.35rem;
+}
+
+.timeline-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.35rem;
+}
+
+.timeline-desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+/* ===================================================================
+   BÖLÜM 3: 3D PARA ÇEVİRME VE GALERİ STİLLERİ
+   =================================================================== */
+/* 3D Para Çevirme Kartları (Flip Coin) */
+.coin-3d-card {
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.coin-3d-inner {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform-style: preserve-3d;
+}
+
+.coin-3d-card.flipped .coin-3d-inner {
+  transform: rotateY(180deg);
+}
+
+.coin-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  border-radius: var(--radius-sm);
+  padding: 1rem;
+}
+
+.coin-back {
+  transform: rotateY(180deg);
+  background: #0c1a12;
+  text-align: center;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid var(--pt-gold);
+}
+
+.coin-flip-hint {
+  font-size: 0.75rem;
+  color: var(--pt-gold);
+  background: rgba(255, 196, 0, 0.15);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  display: inline-block;
+  margin-top: 0.5rem;
+}
+
+/* Sekmeler ve Galeri */
+.currency-tabs-nav {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.tab-btn {
+  padding: 0.85rem 1.75rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tab-btn:hover {
+  color: #fff;
+  border-color: var(--pt-gold);
+  background: var(--bg-card-hover);
+}
+
+.tab-btn.active {
+  color: #fff;
+  background: linear-gradient(135deg, var(--pt-green) 0%, var(--pt-red) 100%);
+  border-color: var(--pt-gold);
+  box-shadow: 0 5px 20px rgba(218, 41, 28, 0.4);
+}
+
+.currency-tab-content {
+  display: none;
+}
+.currency-tab-content.active {
+  display: block;
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.currency-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.currency-item-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+}
+
+.currency-item-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--border-glow);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.7);
+}
+
+.currency-img-wrap {
+  background: #000;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 220px;
+  overflow: hidden;
+  position: relative;
+}
+
+.currency-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 4px;
+  transition: var(--transition);
+}
+
+.currency-details {
+  padding: 1.25rem;
+  flex-grow: 1;
+}
+
+.currency-denom {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--pt-gold);
+  margin-bottom: 0.25rem;
+}
+
+.currency-meta {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  margin-bottom: 0.5rem;
+}
+
+.currency-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ===================================================================
+   BÖLÜM 4: ETKİLEŞİMLİ PORTEKİZ QUİZ (BİLGİ YARIŞMASI)
+   =================================================================== */
+.quiz-container {
+  background: linear-gradient(135deg, rgba(4, 106, 56, 0.35) 0%, rgba(218, 41, 28, 0.3) 100%);
+  border: 1px solid var(--pt-gold);
+  border-radius: var(--radius-lg);
+  padding: 3rem 2.5rem;
+  max-width: 850px;
+  margin: 0 auto;
+  box-shadow: var(--shadow-glow);
+  text-align: center;
+}
+
+.quiz-score-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.quiz-badge {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--pt-gold);
+  background: rgba(255, 196, 0, 0.15);
+  padding: 0.3rem 0.8rem;
+  border-radius: 50px;
+}
+
+.quiz-progress {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.quiz-question-text {
+  font-family: 'Cinzel', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 2rem;
+}
+
+.quiz-options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.quiz-option-btn {
+  padding: 1.1rem 1.25rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: #fff;
+  cursor: pointer;
+  transition: var(--transition);
+  text-align: left;
+}
+
+.quiz-option-btn:hover {
+  background: rgba(255, 196, 0, 0.15);
+  border-color: var(--pt-gold);
+  transform: translateY(-2px);
+}
+
+.quiz-option-btn.correct {
+  background: var(--pt-green) !important;
+  border-color: #20e065 !important;
+  color: #fff !important;
+  box-shadow: 0 0 15px #20e065;
+}
+
+.quiz-option-btn.wrong {
+  background: var(--pt-red) !important;
+  border-color: #ff4d4d !important;
+  color: #fff !important;
+  box-shadow: 0 0 15px #ff4d4d;
+}
+
+.quiz-feedback-box {
+  min-height: 50px;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.quiz-next-btn {
+  display: inline-block;
+  padding: 0.85rem 2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: var(--radius-md);
+  background: var(--pt-gold);
+  color: #000;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.quiz-next-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px var(--pt-gold);
+}
+
+/* ===================================================================
+   HAFTA SAYFALARI ŞABLON STİLLERİ
+   =================================================================== */
+.week-page-hero {
+  text-align: center;
+  padding: 5rem 1.5rem 3rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.week-badge {
+  display: inline-block;
+  padding: 0.4rem 1.2rem;
+  background: rgba(4, 106, 56, 0.3);
+  border: 1px solid var(--pt-green);
+  border-radius: 50px;
+  color: #1ed760;
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: 1.25rem;
+}
+
+.week-page-title {
+  font-family: 'Cinzel', serif;
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.week-placeholder-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 3rem 2rem;
+  text-align: center;
+  max-width: 800px;
+  margin: 2rem auto;
+}
+
+.week-placeholder-icon {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+}
+
+.week-placeholder-card h3 {
+  font-size: 1.5rem;
+  color: var(--pt-gold);
+  margin-bottom: 0.75rem;
+}
+
+.week-placeholder-card p {
+  color: var(--text-muted);
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ===================================================================
+   ALT BİLGİ (FOOTER)
+   =================================================================== */
+.main-footer {
+  background: #040906;
+  border-top: 1px solid var(--border-color);
+  padding: 3rem 1.5rem 2rem;
+  margin-top: 5rem;
+}
+
+.footer-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.footer-text {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+.footer-quick-links {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+}
+
+.footer-quick-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: var(--transition);
+}
+
+.footer-quick-links a:hover {
+  color: var(--pt-gold);
+}
+
+/* ===================================================================
+   RESPONSIVE (MOBİL & TABLET UYUMLULUK)
+   =================================================================== */
+@media (max-width: 1024px) {
+  .hero-banner {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 2rem;
+    padding: 2rem;
+  }
+  .hero-desc {
+    margin: 0 auto 2rem;
+  }
+  .hero-actions {
+    justify-content: center;
+  }
+  .facts-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .culture-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .interactive-flag-container {
+    grid-template-columns: 1fr;
+  }
+  .currency-gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .quiz-options-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.2rem;
+  }
+  .section-title {
+    font-size: 1.9rem;
+  }
+  .culture-grid {
+    grid-template-columns: 1fr;
+  }
+  .currency-gallery {
+    grid-template-columns: 1fr;
+  }
+  .currency-tabs-nav {
+    flex-direction: column;
+  }
+  .tab-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+}

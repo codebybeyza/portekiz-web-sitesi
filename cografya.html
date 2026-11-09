@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portekiz Coğrafyası | Dağlar, Volkanlar, Ovalar ve Doğal Harikalar</title>
+  
+  <!-- Favicon: Portekiz Bayrağı -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/flag-of-portugal.svg">
+  
+  <!-- CSS Dosyası -->
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .geo-hero {
+      background: linear-gradient(135deg, rgba(4, 106, 56, 0.35) 0%, rgba(218, 41, 28, 0.25) 100%);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 3.5rem 2rem;
+      text-align: center;
+      margin-bottom: 3.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .geo-section-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-bottom: 3rem;
+      transition: var(--transition);
+    }
+    .geo-section-card:hover {
+      border-color: var(--border-glow);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+    }
+    .geo-content-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 2.5rem;
+      padding: 2.5rem;
+    }
+    .geo-content-grid.reverse .geo-img-wrap {
+      order: -1;
+    }
+    .geo-img-wrap {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+      border: 1px solid var(--border-color);
+      height: 320px;
+    }
+    .geo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .geo-section-card:hover .geo-img {
+      transform: scale(1.06);
+    }
+    .geo-badge-tag {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--pt-gold);
+      background: rgba(255,196,0,0.15);
+      padding: 0.3rem 0.8rem;
+      border-radius: 50px;
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .geo-card-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.85rem;
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+    .geo-card-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 1.25rem;
+    }
+    .geo-stats-row {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .geo-stat-pill {
+      background: rgba(0,0,0,0.5);
+      border-left: 3px solid var(--pt-green);
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+    }
+    .geo-stat-label {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .geo-stat-val {
+      font-size: 1rem;
+      color: #fff;
+      font-weight: 700;
+    }
+    .map-container {
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      background: #c0e3fa;
+    }
+    .map-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .map-badge {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      padding: 0.35rem 0.75rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+      white-space: nowrap;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .map-badge.pt {
+      background: var(--pt-green);
+      color: #fff;
+      border: 2px solid var(--pt-gold);
+    }
+    .map-badge.es {
+      background: rgba(218, 41, 28, 0.95);
+      color: #fff;
+      border: 2px solid #ffd700;
+    }
+    .map-badge.ocean {
+      background: rgba(4, 25, 45, 0.85);
+      color: #8ed0ff;
+      border: 1px solid rgba(142, 208, 255, 0.5);
+      font-size: 0.75rem;
+    }
+    .map-badge.morocco {
+      background: rgba(30, 30, 30, 0.9);
+      color: #fff;
+      border: 1px solid #aaa;
+      font-size: 0.75rem;
+    }
+    @media (max-width: 900px) {
+      .geo-content-grid {
+        grid-template-columns: 1fr;
+        padding: 1.5rem;
+      }
+      .geo-content-grid.reverse .geo-img-wrap {
+        order: 0;
+      }
+      .geo-hero {
+        padding: 2.5rem 1.25rem;
+      }
+      .geo-hero .hero-title {
+        font-size: 2.1rem !important;
+      }
+      .geo-img-wrap {
+        height: 240px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===================================================================
+       ÜST MENÜ (HEADER & NAVBAR)
+       10 Haftalık Menü (Hafta 1 yerine Coğrafya aktif)
+       =================================================================== -->
+  <header class="main-header">
+    <div class="nav-container">
+      <a href="index.html" class="logo-area" title="Portekiz Ana Sayfa">
+        <img src="assets/images/flag-of-portugal.svg" alt="Portekiz Bayrağı" class="logo-flag-icon">
+        <span class="logo-text">PORTUGAL</span>
+      </a>
+
+      <!-- 10 Menü Öğesi -->
+      <nav class="nav-menu-wrapper">
+        <ul class="nav-menu">
+          <li class="nav-item"><a href="index.html">Ana Sayfa</a></li>
+          <li class="nav-item active"><a href="cografya.html">Coğrafya</a></li>
+          <li class="nav-item"><a href="tarih.html">Tarih</a></li>
+          <li class="nav-item"><a href="kultur.html">Kültür</a></li>
+          <li class="nav-item"><a href="turizm.html">Turizm</a></li>
+          <li class="nav-item"><a href="hafta-5.html">Hafta 5</a></li>
+          <li class="nav-item"><a href="hafta-6.html">Hafta 6</a></li>
+          <li class="nav-item"><a href="hafta-7.html">Hafta 7</a></li>
+          <li class="nav-item"><a href="hafta-8.html">Hafta 8</a></li>
+          <li class="nav-item"><a href="hafta-9.html">Hafta 9</a></li>
+          <li class="nav-item"><a href="hafta-10.html">Hafta 10</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===================================================================
+       COĞRAFYA HERO BÖLÜMÜ
+       =================================================================== -->
+  <main class="section">
+    <div class="geo-hero">
+      <span class="geo-badge-tag">🗺️ 1. Bölüm: Doğal Yapı ve Topoğrafya</span>
+      <h1 class="hero-title" style="font-size: 2.8rem; margin-bottom: 1rem;">
+        Portekiz'in <span class="green">Büyüleyici</span> <span class="gold">Coğrafyası</span>
+      </h1>
+      <p class="hero-desc" style="max-width: 750px; margin: 0 auto 1.5rem;">
+        Kuzeyin sarp granit zirvelerinden güneyin altın renkli uçsuz bucaksız ovalarına, okyanus ortasındaki aktif volkanik adalardan kıta Avrupası'nın en batı ucuna kadar Portekiz'in eşsiz coğrafi rehberi.
+      </p>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="#genel-bakis" class="btn btn-primary">🌍 Genel Coğrafya</a>
+        <a href="#harita-komsular" class="btn btn-gold">🗺️ Harita & Komşular</a>
+        <a href="#iklim" class="btn btn-secondary">☀️ İklim</a>
+        <a href="#yanardaglar" class="btn btn-secondary">🌋 Yanardağlar</a>
+        <a href="#daglar" class="btn btn-primary">⛰️ Ünlü Dağlar</a>
+        <a href="#ovalar" class="btn btn-secondary">🌾 Ovalar</a>
+        <a href="#unlu-yerler" class="btn btn-gold">🌊 Ünlü Yerler</a>
+      </div>
+    </div>
+
+    <!-- ===================================================================
+         1. DÜZENLİ SIRA: GENEL COĞRAFYA
+         =================================================================== -->
+    <div id="genel-bakis" class="section-header" style="margin-bottom: 2rem;">
+      <span class="section-subtitle">1. Aşama</span>
+      <h2 class="section-title">Genel Coğrafi Yapı & Konum</h2>
+      <p class="section-desc">
+        Portekiz, İber Yarımadası'nın batısında yer alan anakara toprakları ile Atlantik Okyanusu'ndaki iki özerk takımadadan (Azorlar ve Madeira) oluşur.
+      </p>
+    </div>
+
+    <div class="facts-grid" style="margin-bottom: 3.5rem;">
+      <div class="fact-card">
+        <div class="fact-icon">🗺️</div>
+        <div class="fact-label">Yüzölçümü</div>
+        <div class="fact-value">92.212 km²</div>
+        <div class="fact-note">Anakara 89.015 km², adalar ise 3.197 km² alanı kaplar.</div>
+      </div>
+
+      <div class="fact-card">
+        <div class="fact-icon">🌊</div>
+        <div class="fact-label">Kıyı Şeridi</div>
+        <div class="fact-value">1.793 km</div>
+        <div class="fact-note">Atlantik Okyanusu kıyısında devasa bir denizel etki ve falezler.</div>
+      </div>
+
+      <div class="fact-card">
+        <div class="fact-icon">🧭</div>
+        <div class="fact-label">Kuzey - Güney Tezadı</div>
+        <div class="fact-value">İki Farklı Dünya</div>
+        <div class="fact-note">Kuzey dağlık, ormanlık ve yağışlı; Güney düz, kurak ve güneşlidir.</div>
+      </div>
+
+      <div class="fact-card">
+        <div class="fact-icon">🏝️</div>
+        <div class="fact-label">Özerk Adalar</div>
+        <div class="fact-value">Azorlar & Madeira</div>
+        <div class="fact-note">Tektonik ve volkanik kökenli, subtropikal iklime sahip cennet adalar.</div>
+      </div>
+    </div>
+
+    <!-- ===================================================================
+         HARİTA, KOMŞULAR VE SINIRLAR & EN YÜKSEK / EN ALÇAK NOKTALAR
+         =================================================================== -->
+    <div id="harita-komsular" class="section-header" style="margin-bottom: 2rem;">
+      <span class="section-subtitle">Konum & Coğrafi Sınırlar</span>
+      <h2 class="section-title">Portekiz Haritası & Komşuları</h2>
+      <p class="section-desc">
+        İber Yarımadası'nın batı yakasında yer alan Portekiz'in harita üzerindeki konumu, tek kara komşusu ve deniz sınırları.
+      </p>
+    </div>
+
+    <div class="geo-section-card" style="margin-bottom: 3.5rem;">
+      <div class="geo-content-grid">
+        <!-- Sol: Net Renkli Harita -->
+        <div class="geo-img-wrap" style="height: 380px;">
+          <img src="assets/images/portugal-neighbors-clear-map.png" alt="Portekiz ve Komşuları Haritası (Net Renkli Harita)" class="geo-img" title="Büyütmek için tıklayınız">
+        </div>
+
+        <!-- Sağ: Komşuluk ve Yükseklik Bilgileri -->
+        <div>
+          <span class="geo-badge-tag">🗺️ Sınırlar ve Komşuluk</span>
+          <h3 class="geo-card-title">Portekiz'in Komşuları Kimlerdir?</h3>
+          
+          <!-- Komşular Kısa Listesi -->
+          <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1.5rem;">
+            <div style="background: rgba(0,0,0,0.45); border-left: 4px solid var(--pt-red); padding: 0.75rem 1rem; border-radius: 6px; display: flex; align-items: center; justify-content: space-between;">
+              <div>
+                <strong style="color: #fff; font-size: 1rem;">🇪🇸 İspanya</strong>
+                <div style="font-size: 0.8rem; color: var(--text-muted);">Portekiz'in tek kara sınır komşusudur (Kuzey ve Doğu sınırı).</div>
+              </div>
+              <span class="geo-badge-tag" style="margin: 0; background: rgba(218,41,28,0.2); color: #ff6b6b;">1.214 km Sınır</span>
+            </div>
+
+            <div style="background: rgba(0,0,0,0.45); border-left: 4px solid #0099ff; padding: 0.75rem 1rem; border-radius: 6px; display: flex; align-items: center; justify-content: space-between;">
+              <div>
+                <strong style="color: #fff; font-size: 1rem;">🌊 Atlantik Okyanusu</strong>
+                <div style="font-size: 0.8rem; color: var(--text-muted);">Batı ve güney sınırının tamamını çevreler.</div>
+              </div>
+              <span class="geo-badge-tag" style="margin: 0; background: rgba(0,153,255,0.2); color: #80c8ff;">1.793 km Sahil</span>
+            </div>
+
+            <div style="background: rgba(0,0,0,0.45); border-left: 4px solid var(--text-dim); padding: 0.75rem 1rem; border-radius: 6px; display: flex; align-items: center; justify-content: space-between;">
+              <div>
+                <strong style="color: #fff; font-size: 1rem;">🇲🇦 Fas</strong>
+                <div style="font-size: 0.8rem; color: var(--text-muted);">Cebelitarık Boğazı'nın hemen güneyindeki en yakın deniz aşırı komşusudur.</div>
+              </div>
+              <span class="geo-badge-tag" style="margin: 0; background: rgba(255,255,255,0.1); color: var(--text-muted);">Deniz Aşırı</span>
+            </div>
+          </div>
+
+          <!-- En Yüksek ve En Alçak Nokta -->
+          <h4 style="color: var(--pt-gold); font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.75rem;">
+            ⛰️ Ülkenin En Yüksek ve En Alçak Noktaları
+          </h4>
+          <div class="geo-stats-row">
+            <div class="geo-stat-pill" style="border-left-color: var(--pt-gold); flex: 1;">
+              <div class="geo-stat-label">EN YÜKSEK NOKTA (TÜM ÜLKE)</div>
+              <div class="geo-stat-val">Montanha do Pico (2.351 m)</div>
+              <div style="font-size: 0.75rem; color: var(--text-dim); margin-top: 0.2rem;">Pico Adası, Azorlar (Anakara: Torre 1.993 m)</div>
+            </div>
+            <div class="geo-stat-pill" style="border-left-color: #0099ff; flex: 1;">
+              <div class="geo-stat-label">EN ALÇAK NOKTA</div>
+              <div class="geo-stat-val">Atlantik Kıyısı (0 m)</div>
+              <div style="font-size: 0.75rem; color: var(--text-dim); margin-top: 0.2rem;">Deniz seviyesi (1.793 km kıyı)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================================================================
+         İKLİM BÖLÜMÜ
+         =================================================================== -->
+    <div id="iklim" class="section-header" style="margin-bottom: 2rem;">
+      <span class="section-subtitle">Hava & İklim Koşulları</span>
+      <h2 class="section-title">Portekiz'in İklimi</h2>
+      <p class="section-desc">
+        Yılda 300'e yakın güneşli gün sayısıyla Avrupa'nın en aydınlık ve ılıman iklimine sahip ülkesi.
+      </p>
+    </div>
+
+    <div class="geo-section-card" style="margin-bottom: 3.5rem;">
+      <div style="padding: 2.25rem;">
+        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem; flex-wrap: wrap;">
+          <span style="font-size: 2.2rem;">☀️</span>
+          <div>
+            <span class="geo-badge-tag" style="margin-bottom: 0.3rem;">Genel İklim Tipi</span>
+            <h3 style="font-family: 'Cinzel', serif; font-size: 1.6rem; color: #fff; margin: 0;">Ilıman Akdeniz ve Okyanusal İklim</h3>
+          </div>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.5rem;">
+          Portekiz genelinde kışlar son derece ılıman, yazlar ise sıcak ve kurak geçer. Okyanusun yumuşatıcı etkisi sayesinde aşırı dondurucu soğuklar nadirdir. Ülkenin farklı coğrafi bölgelerinde 3 belirgin iklim karakteri görülür:
+        </p>
+
+        <div class="culture-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+          <div style="background: rgba(0,0,0,0.4); border: 1px solid var(--border-color); border-top: 4px solid var(--pt-green); border-radius: var(--radius-sm); padding: 1.5rem;">
+            <div style="font-size: 1.15rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem;">🌧️ Kuzey Bölgesi (Okyanusal)</div>
+            <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.65;">
+              Atlantik rüzgarlarına açık olan kuzey ve kuzeybatı (Minho ve Douro) bol yağış alır. Serin ve yemyeşil yaylalar, gür ormanlar ve bereketli üzüm bağları bu nemli iklimle şekillenir.
+            </p>
+          </div>
+
+          <div style="background: rgba(0,0,0,0.4); border: 1px solid var(--border-color); border-top: 4px solid var(--pt-gold); border-radius: var(--radius-sm); padding: 1.5rem;">
+            <div style="font-size: 1.15rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem;">☀️ Güney Bölgesi (Akdeniz)</div>
+            <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.65;">
+              Alentejo ovaları ve Algarve sahilleri tipik sıcak Akdeniz iklimine sahiptir. Yaz ayları oldukça sıcak ve kuraktır; yılda 3.000 saatten fazla güneşlenme süresiyle Avrupa'nın en güneşli tatil cennetidir.
+            </p>
+          </div>
+
+          <div style="background: rgba(0,0,0,0.4); border: 1px solid var(--border-color); border-top: 4px solid var(--pt-red); border-radius: var(--radius-sm); padding: 1.5rem;">
+            <div style="font-size: 1.15rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem;">🌺 Özerk Adalar (Subtropikal)</div>
+            <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.65;">
+              Madeira ve Azorlar'da Gulf Stream akıntısı sayesinde yıl boyunca 16°C – 25°C arasında değişen <em>"Ebedi Bahar"</em> iklimi hüküm sürer. Bol nem ve ılıman hava tropikal çiçekleri besler.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================================================================
+         2. DÜZENLİ SIRA: YANARDAĞLAR (VOLKANLAR)
+         =================================================================== -->
+    <div id="yanardaglar" class="section-header" style="margin-bottom: 2rem;">
+      <span class="section-subtitle">2. Aşama</span>
+      <h2 class="section-title">Portekiz'in Yanardağları (Volkanik Miras)</h2>
+      <p class="section-desc">
+        Portekiz anakarasında aktif bir yanardağ bulunmazken; Atlantik'teki <strong>Azor Takımadaları (Açores)</strong> tamamen volkanik kökenlidir ve dünyanın en büyüleyici kraterlerine ev sahipliği yapar.
+      </p>
+    </div>
+
+    <div class="geo-section-card">
+      <div class="geo-content-grid">
+        <div>
+          <span class="geo-badge-tag">🌋 En Yüksek Volkan</span>
+          <h3 class="geo-card-title">Montanha do Pico (Pico Stratovolkanı)</h3>
+          <p class="geo-card-desc">
+            Pico Adası'nda yükselen <strong>Montanha do Pico</strong>, deniz seviyesinden <strong>2.351 metre</strong> yüksekliğiyle hem Portekiz Cumhuriyeti'nin en yüksek dağı hem de Atlantik'in en görkemli stratovolkanıdır.
+          </p>
+          <p class="geo-card-desc">
+            Zirvesindeki kaldera (Piquinho konisi) bulutların üzerinde parlar. Tarihsel süreçte en son 1718 ve 1720 yıllarında büyük lav akıntıları püskürtmüştür. Günümüzde zirvede sıcak kükürt buharları çıkaran fumeroller aktif durumdadır.
+          </p>
+          <div class="geo-stats-row">
+            <div class="geo-stat-pill">
+              <div class="geo-stat-label">YÜKSEKLİK</div>
+              <div class="geo-stat-val">2.351 m</div>
+            </div>
+            <div class="geo-stat-pill" style="border-left-color: var(--pt-red);">
+              <div class="geo-stat-label">KONUM</div>
+              <div class="geo-stat-val">Pico Adası (Azorlar)</div>
+            </div>
+            <div class="geo-stat-pill" style="border-left-color: var(--pt-gold);">
+              <div class="geo-stat-label">TİP</div>
+              <div class="geo-stat-val">Aktif Stratovolkan</div>
+            </div>
+          </div>
+        </div>
+        <div class="geo-img-wrap">
+          <img src="assets/images/pico-volcano.jpg" alt="Montanha do Pico Stratovolkanı" class="geo-img">
+        </div>
+      </div>
+    </div>
+
+    <div class="geo-section-card">
+      <div class="geo-content-grid reverse">
+        <div>
+          <span class="geo-badge-tag">🌊 Denizaltı Volkanı</span>
+          <h3 class="geo-card-title">Capelinhos Yanardağı & Furnas Kalderası</h3>
+          <p class="geo-card-desc">
+            <strong>Capelinhos Yanardağı (Faial Adası):</strong> 1957 – 1958 yıllarında denizin altından patlayarak lav ve kül püskürtmüş, okyanusta 2.4 km²'lik yepyeni bir kara parçası meydana getirmiştir. 20. yüzyılın en önemli volkanik olaylarından biridir.
+          </p>
+          <p class="geo-card-desc">
+            <strong>Furnas Vadisi (São Miguel):</strong> Aktif hidrotermal havzadır. Yeraltından kaynayan çamurlar, kükürtlü sıcak su gayzerleri (caldeiras) ile ünlüdür. Portekizliler meşhur güveçleri "Cozido das Furnas"ı toprağın doğal volkanik ısısıyla pişirirler.
+          </p>
+          <div class="geo-stats-row">
+            <div class="geo-stat-pill">
+              <div class="geo-stat-label">SON PATLAMA</div>
+              <div class="geo-stat-val">1958 (Capelinhos)</div>
+            </div>
+            <div class="geo-stat-pill" style="border-left-color: var(--pt-gold);">
+              <div class="geo-stat-label">VOLKANİK ÖZELLİK</div>
+              <div class="geo-stat-val">Doğal Jeotermal Pişirme</div>
+            </div>
+          </div>
+        </div>
+        <div class="geo-img-wrap">
+          <img src="assets/images/capelinhos-volcano.jpg" alt="Capelinhos Yanardağı ve Volkanik Kül Sahili" class="geo-img">
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================================================================
+         3. DÜZENLİ SIRA: ÜNLÜ DAĞLAR
+         =================================================================== -->
+    <div id="daglar" class="section-header" style="margin-bottom: 2rem;">
+      <span class="section-subtitle">3. Aşama</span>
+      <h2 class="section-title">Portekiz'in En Ünlü Dağları</h2>
+      <p class="section-desc">
+        Kuzey ve İç Portekiz'in granit kütleleri, buzul vadileri ve bembeyaz karlı zirveleri.
+      </p>
+    </div>
+
+    <div class="geo-section-card">
+      <div class="geo-content-grid">
+        <div>
+          <span class="geo-badge-tag">🏔️ Anakaranın Zirvesi</span>
+          <h3 class="geo-card-title">Serra da Estrela (Yıldız Dağları)</h3>
+          <p class="geo-card-desc">
+            Kıta Portekizi'nin en yüksek sıradağıdır. En tepe noktası olan <strong>Torre Zirvesi</strong> 1.993 metreye ulaşır (tepesine yapılan 7 metrelik anıt kuleyle tam 2.000 metreye tamamlanmıştır).
+          </p>
+          <p class="geo-card-desc">
+            Portekiz'in <strong>tek kış sporları ve kayak merkezi</strong> bu dağdadır. Buzul Çağı'ndan kalan U biçimli meşhur <em>Zêzere Buzul Vadisi</em>, granit kayalıklar ve meşhur leziz koyun peyniri "Queijo Serra da Estrela" ile tanınır.
+          </p>
+          <div class="geo-stats-row">
+            <div class="geo-stat-pill">
+              <div class="geo-stat-label">ANAKARA ZİRVESİ</div>
+              <div class="geo-stat-val">Torre (1.993 m)</div>
+            </div>
+            <div class="geo-stat-pill" style="border-left-color: var(--pt-gold);">
+              <div class="geo-stat-label">ÖZELLİK</div>
+              <div class="geo-stat-val">Buzul Vadisi & Kayak</div>
+            </div>
+          </div>
+        </div>
+        <div class="geo-img-wrap">
+          <img src="assets/images/serra-estrela.jpg" alt="Serra da Estrela Dağları" class="geo-img">
+        </div>
+      </div>
+    </div>
+
+    <div class="culture-grid" style="margin-bottom: 3.5rem;">
+      <div class="culture-card">
+        <div class="culture-body">
+          <span class="culture-tag">Masalsı Dağ</span>
+          <h3 class="culture-title">Serra de Sintra (Sintra Dağı)</h3>
+          <p class="culture-text">
+            Lizbon'un hemen batısında Atlantik rüzgarlarını karşılayan granit tepeler silsilesi. Mikro-kliması sayesinde yoğun sisler, yemyeşil subtropikal eğrelti otları ve tepesindeki renkli Pena Sarayı ile büyülü bir atmosfer sunar.
+          </p>
+        </div>
+      </div>
+
+      <div class="culture-card">
+        <div class="culture-body">
+          <span class="culture-tag">Yabani Doğa</span>
+          <h3 class="culture-title">Serra do Gerês (Peneda-Gerês)</h3>
+          <p class="culture-text">
+            Portekiz'in tek <strong>Milli Parkı</strong> olan Peneda-Gerês bölgesinde yer alır. İber kurdu, vahşi Garrano atları ve kristal berraklığındaki dağ şelaleleriyle granit bir kanyon labirentidir.
+          </p>
+        </div>
+      </div>
+
+      <div class="culture-card">
+        <div class="culture-body">
+          <span class="culture-tag">Şarap Dağları</span>
+          <h3 class="culture-title">Serra do Marão</h3>
+          <p class="culture-text">
+            Porto ile Douro şarap vadisi arasında devasa bir doğal bariyer oluşturan dağdır. Okyanusun nemli havasını keserek Douro Vadisi'nde sıcak ve güneşli bir mikro-iklim oluşmasını sağlar.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================================================================
+         4. DÜZENLİ SIRA: OVALAR VE DÜZLÜKLER
+         =================================================================== -->
+    <div id="ovalar" class="section-header" style="margin-bottom: 2rem;">
+      <span class="section-subtitle">4. Aşama</span>
+      <h2 class="section-title">Uçsuz Bucaksız Ovalar ve Nehir Vadileri</h2>
+      <p class="section-desc">
+        Güneye indikçe dağlar yerini altın sarısı buğday başaklarına, mantar meşelerine ve bereketli nehir taşkın ovalarına bırakır.
+      </p>
+    </div>
+
+    <div class="geo-section-card">
+      <div class="geo-content-grid reverse">
+        <div>
+          <span class="geo-badge-tag">🌾 Altın Düzlükler</span>
+          <h3 class="geo-card-title">Alentejo Ovaları (Planícies do Alentejo)</h3>
+          <p class="geo-card-desc">
+            Tejo Nehri'nin güneyinden Algarve dağlarına kadar uzanan <strong>Alentejo</strong>, Portekiz yüzölçümünün üçte birini kaplayan devasa bir düzlük coğrafyasıdır ("Além do Tejo" = Tejo'nun Ötesi anlamına gelir).
+          </p>
+          <p class="geo-card-desc">
+            Göz alabildiğine uzanan altın sarısı dalgalı ovalar, asırlık mantar meşesi (Montado) korulukları ve zeytinliklerle kaplıdır. <strong>Portekiz, dünya doğal mantar üretiminin %50'sinden fazlasını tek başına bu ovalarda karşılar.</strong>
+          </p>
+          <div class="geo-stats-row">
+            <div class="geo-stat-pill">
+              <div class="geo-stat-label">YERYÜZÜ ŞEKLİ</div>
+              <div class="geo-stat-val">Peneplen & Dalgalı Düzlük</div>
+            </div>
+            <div class="geo-stat-pill" style="border-left-color: var(--pt-green);">
+              <div class="geo-stat-label">DÜNYA LİDERİ</div>
+              <div class="geo-stat-val">Mantar Meşesi (Cork)</div>
+            </div>
+          </div>
+        </div>
+        <div class="geo-img-wrap">
+          <img src="assets/images/alentejo.jpg" alt="Alentejo Düzlükleri ve Ovaları" class="geo-img">
+        </div>
+      </div>
+    </div>
+
+    <div class="culture-grid" style="margin-bottom: 3.5rem;">
+      <div class="culture-card">
+        <div class="culture-body">
+          <span class="culture-tag">Tarımın Kalbi</span>
+          <h3 class="culture-title">Ribatejo Ovası (Lezíria do Tejo)</h3>
+          <p class="culture-text">
+            Tejo Nehri'nin her kış taşkınlarla getirdiği zengin alüvyonlarla beslenen son derece verimli tarım ovasıdır. Tahıl, sebze, pirinç tarlaları ve Portekiz atlarının (Lusitano) yetiştirildiği geniş çayırlardır.
+          </p>
+        </div>
+      </div>
+
+      <div class="culture-card">
+        <div class="culture-body">
+          <span class="culture-tag">UNESCO Terasları</span>
+          <h3 class="culture-title">Douro Nehri Vadisi</h3>
+          <p class="culture-text">
+            Yüzyıllar boyunca insan eliyle şekillendirilmiş şist teraslar. Dünyanın en eski sınırlandırılmış şarap bölgesidir. Sarp vadi yamaçları boyunca kıvrılan Douro Nehri eşsiz bir kanyon coğrafyası çizer.
+          </p>
+        </div>
+      </div>
+
+      <div class="culture-card">
+        <div class="culture-body">
+          <span class="culture-tag">Kıyı Lagünü</span>
+          <h3 class="culture-title">Ria de Aveiro Ovası</h3>
+          <p class="culture-text">
+            Vouga Nehri'nin okyanusla birleştiği deltada oluşan sığ lagün ovası. Tuz tavaları, kanallar ve sucul çayırlarla "Portekiz'in Venedik'i" olarak anılan kıyı düzlüğüdür.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================================================================
+         5. DÜZENLİ SIRA: ÜNLÜ COĞRAFİ YERLER
+         =================================================================== -->
+    <div id="unlu-yerler" class="section-header" style="margin-bottom: 2rem;">
+      <span class="section-subtitle">5. Aşama</span>
+      <h2 class="section-title">Portekiz'in En Ünlü Coğrafi Noktaları</h2>
+      <p class="section-desc">
+        Doğanın binlerce yılda şekillendirdiği, dünyanın dört bir yanından gezginleri büyüleyen ikonik doğal anıtlar.
+      </p>
+    </div>
+
+    <!-- Cabo da Roca -->
+    <div class="geo-section-card">
+      <div class="geo-content-grid">
+        <div>
+          <span class="geo-badge-tag">🌊 Avrupa'nın En Batı Ucu</span>
+          <h3 class="geo-card-title">Cabo da Roca (Roca Burnu)</h3>
+          <p class="geo-card-desc">
+            Atlantik Okyanusu üzerinde <strong>140 metre</strong> yüksekliğe dik bir falezle yükselen Cabo da Roca, <strong>Kıta Avrupası'nın en batıdaki coğrafi noktasıdır</strong> (Koordinat: 38° 47′ K, 9° 30′ B).
+          </p>
+          <p class="geo-card-desc">
+            Ünlü Portekizli şair Luís de Camões, "Os Lusíadas" destanında burayı şu tarihi mısrayla ölümsüzleştirmiştir: <em>"Onde a terra acaba e o mar começa" (Karaların bittiği ve denizin başladığı yer).</em>
+          </p>
+          <div class="geo-stats-row">
+            <div class="geo-stat-pill">
+              <div class="geo-stat-label">FALEZ YÜKSEKLİĞİ</div>
+              <div class="geo-stat-val">140 metre</div>
+            </div>
+            <div class="geo-stat-pill" style="border-left-color: var(--pt-red);">
+              <div class="geo-stat-label">COĞRAFİ ÜNVAN</div>
+              <div class="geo-stat-val">Kıta Avrupası'nın En Batısı</div>
+            </div>
+          </div>
+        </div>
+        <div class="geo-img-wrap">
+          <img src="assets/images/cabo-da-roca.jpg" alt="Cabo da Roca Falezleri" class="geo-img">
+        </div>
+      </div>
+    </div>
+
+    <!-- Benagil Mağarası -->
+    <div class="geo-section-card">
+      <div class="geo-content-grid reverse">
+        <div>
+          <span class="geo-badge-tag">🏝️ Kireçtaşı Katedrali</span>
+          <h3 class="geo-card-title">Benagil Deniz Mağarası (Algarve)</h3>
+          <p class="geo-card-desc">
+            Algarve bölgesinde, dalgaların milyonlarca yılda kireçtaşı kayalıklarını oymasıyla oluşan <strong>Algar de Benagil</strong>, tavanında doğal bir çatı penceresi (oculus) bulunan devasa bir deniz mağarası kubbesidir.
+          </p>
+          <p class="geo-card-desc">
+            İçerisinde sadece denizden (tekne, kano veya yüzerek) ulaşılabilen gizli altın sarısı bir kumsal barındırır. Güneş ışınları tavandaki delikten mağara kumlarına dökülerek büyüleyici bir ışık oyunu yaratır.
+          </p>
+          <div class="geo-stats-row">
+            <div class="geo-stat-pill">
+              <div class="geo-stat-label">JEOLOJİK TİP</div>
+              <div class="geo-stat-val">Kireçtaşı Deniz Mağarası</div>
+            </div>
+            <div class="geo-stat-pill" style="border-left-color: var(--pt-gold);">
+              <div class="geo-stat-label">BÖLGE</div>
+              <div class="geo-stat-val">Algarve Sahili</div>
+            </div>
+          </div>
+        </div>
+        <div class="geo-img-wrap">
+          <img src="assets/images/benagil-cave.jpg" alt="Benagil Deniz Mağarası" class="geo-img">
+        </div>
+      </div>
+    </div>
+
+    <!-- Sete Cidades İkiz Gölleri -->
+    <div class="geo-section-card">
+      <div class="geo-content-grid">
+        <div>
+          <span class="geo-badge-tag">💧 Volkanik Efsane</span>
+          <h3 class="geo-card-title">Lagoa das Sete Cidades (İkiz Krater Gölleri)</h3>
+          <p class="geo-card-desc">
+            São Miguel Adası'ndaki devasa volkanik kalderanın içinde yer alan ikiz göldür. İki göl dar bir boğazla birbirine bağlıdır ancak mineral ve ışık kırılmaları nedeniyle <strong>biri zümrüt yeşili (Lagoa Verde), diğeri gök mavisi (Lagoa Azul)</strong> görünür.
+          </p>
+          <p class="geo-card-desc">
+            Yerel efsaneye göre, mavi gözlü bir prenses ile yeşil gözlü bir çobanın imkansız aşkı yüzünden döktükleri gözyaşlarından oluşmuştur. Azor Adaları'nın kartpostallık doğa harikasıdır.
+          </p>
+          <div class="geo-stats-row">
+            <div class="geo-stat-pill">
+              <div class="geo-stat-label">KALDERA ÇAPI</div>
+              <div class="geo-stat-val">5 kilometre</div>
+            </div>
+            <div class="geo-stat-pill" style="border-left-color: var(--pt-green);">
+              <div class="geo-stat-label">GÖL RENKLERİ</div>
+              <div class="geo-stat-val">Yeşil & Mavi İkiz Göller</div>
+            </div>
+          </div>
+        </div>
+        <div class="geo-img-wrap">
+          <img src="assets/images/sete-cidades.jpg" alt="Sete Cidades İkiz Krater Gölleri" class="geo-img">
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ===================================================================
+       ALT BİLGİ (FOOTER)
+       =================================================================== -->
+  <footer class="main-footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <img src="assets/images/flag-of-portugal.svg" alt="Portekiz Bayrağı" class="logo-flag-icon">
+        <span class="logo-text" style="font-size: 1.1rem;">PORTUGAL</span>
+      </div>
+      <p class="footer-text">
+        © 2026 Portekiz Tanıtım Portalı. Coğrafya Bölümü.
+      </p>
+      <ul class="footer-quick-links">
+        <li><a href="index.html">Ana Sayfa</a></li>
+        <li><a href="cografya.html">Coğrafya</a></li>
+        <li><a href="tarih.html">Tarih</a></li>
+        <li><a href="kultur.html">Kültür</a></li>
+        <li><a href="turizm.html">Turizm</a></li>
+        <li><a href="#genel-bakis">Genel Bakış</a></li>
+        <li><a href="#unlu-yerler">Doğal Harikalar</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

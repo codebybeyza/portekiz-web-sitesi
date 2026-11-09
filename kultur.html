@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portekiz Kültürü | Geleneksel Kıyafetler, Bayramlar, Festivaller ve Mimari Miras</title>
+  
+  <!-- Favicon: Portekiz Bayrağı -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/flag-of-portugal.svg">
+  
+  <!-- CSS Dosyası -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    /* ===================================================================
+       KÜLTÜR SAYFASI ÖZEL STİLLERİ
+       =================================================================== */
+    .cult-hero {
+      background: linear-gradient(135deg, rgba(4, 106, 56, 0.32) 0%, rgba(255, 196, 0, 0.22) 50%, rgba(218, 41, 28, 0.32) 100%);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 3.5rem 2rem;
+      text-align: center;
+      margin-bottom: 3.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .cult-hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 196, 0, 0.08) 0%, transparent 60%);
+      pointer-events: none;
+      animation: rotateSlow 40s linear infinite;
+    }
+    @keyframes rotateSlow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* Kültür Bölüm Kartı */
+    .cult-section-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-bottom: 3rem;
+      transition: var(--transition);
+      position: relative;
+    }
+    .cult-section-card:hover {
+      border-color: var(--border-glow);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.65), 0 0 20px rgba(255,196,0,0.15);
+      transform: translateY(-4px);
+    }
+    .cult-content-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      gap: 2.5rem;
+      padding: 2.5rem;
+    }
+    .cult-content-grid.reverse .cult-img-wrap {
+      order: -1;
+    }
+    .cult-img-wrap {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+      border: 1px solid var(--border-color);
+      height: 340px;
+      position: relative;
+    }
+    .cult-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+      cursor: zoom-in;
+    }
+    .cult-section-card:hover .cult-img {
+      transform: scale(1.06);
+    }
+    .cult-badge-tag {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--pt-gold);
+      background: rgba(255,196,0,0.15);
+      padding: 0.35rem 0.85rem;
+      border-radius: 50px;
+      margin-bottom: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      border: 1px solid rgba(255, 196, 0, 0.3);
+    }
+    .cult-card-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.85rem;
+      color: #fff;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+    .cult-card-desc {
+      color: var(--text-muted);
+      font-size: 0.96rem;
+      line-height: 1.75;
+      margin-bottom: 1.25rem;
+    }
+    .cult-stats-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1.25rem;
+    }
+    .cult-stat-pill {
+      background: rgba(0,0,0,0.55);
+      border-left: 3px solid var(--pt-gold);
+      padding: 0.6rem 1.1rem;
+      border-radius: 6px;
+      flex: 1;
+      min-width: 140px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      border-right: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .cult-stat-label {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .cult-stat-val {
+      font-size: 0.95rem;
+      color: #fff;
+      font-weight: 700;
+      margin-top: 2px;
+    }
+
+    /* Kategori Filtresi */
+    .filter-bar-container {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-bottom: 3.5rem;
+      flex-wrap: wrap;
+    }
+    .filter-pill-btn {
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 0.7rem 1.4rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .filter-pill-btn:hover {
+      border-color: var(--pt-gold);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+    .filter-pill-btn.active {
+      background: linear-gradient(135deg, var(--pt-green) 0%, #0d8a4d 100%);
+      border-color: var(--pt-gold);
+      color: #fff;
+      box-shadow: 0 0 15px rgba(4, 106, 56, 0.6);
+    }
+
+    /* Mimarlık Özellik Gridleri */
+    .arch-features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .arch-feature-box {
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      transition: var(--transition);
+    }
+    .arch-feature-box:hover {
+      border-color: var(--pt-gold);
+      transform: translateY(-3px);
+    }
+    .arch-feature-icon {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+    }
+    .arch-feature-title {
+      font-size: 1.15rem;
+      color: #fff;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .arch-feature-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Kültürel Sembol Kartları */
+    .symbols-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.75rem;
+      margin-bottom: 3.5rem;
+    }
+    .symbol-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      transition: var(--transition);
+      text-align: center;
+    }
+    .symbol-card:hover {
+      border-color: var(--border-glow);
+      transform: translateY(-6px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+    }
+    .symbol-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      display: inline-block;
+      filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));
+    }
+    .symbol-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.35rem;
+      color: #fff;
+      margin-bottom: 0.75rem;
+    }
+    .symbol-desc {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      line-height: 1.65;
+    }
+
+    /* Sorumlu Tasarım (Responsive) */
+    @media (max-width: 900px) {
+      .cult-content-grid {
+        grid-template-columns: 1fr;
+        gap: 1.75rem;
+        padding: 1.75rem;
+      }
+      .cult-content-grid.reverse .cult-img-wrap {
+        order: 0;
+      }
+      .cult-img-wrap {
+        height: 250px;
+      }
+      .cult-card-title {
+        font-size: 1.5rem;
+      }
+      .symbols-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===================================================================
+       ÜST MENÜ (HEADER & NAVBAR)
+       Hafta 3 yerine "Kültür" aktif
+       =================================================================== -->
+  <header class="main-header">
+    <div class="nav-container">
+      <a href="index.html" class="logo-area" title="Portekiz Ana Sayfa">
+        <img src="assets/images/flag-of-portugal.svg" alt="Portekiz Bayrağı" class="logo-flag-icon">
+        <span class="logo-text">PORTUGAL</span>
+      </a>
+
+      <!-- 10 Menü Öğesi: Hafta 1 Coğrafya, Hafta 2 Tarih, Hafta 3 Kültür -->
+      <nav class="nav-menu-wrapper">
+        <ul class="nav-menu">
+          <li class="nav-item"><a href="index.html">Ana Sayfa</a></li>
+          <li class="nav-item"><a href="cografya.html">Coğrafya</a></li>
+          <li class="nav-item"><a href="tarih.html">Tarih</a></li>
+          <li class="nav-item active"><a href="kultur.html">Kültür</a></li>
+          <li class="nav-item"><a href="turizm.html">Turizm</a></li>
+          <li class="nav-item"><a href="hafta-5.html">Hafta 5</a></li>
+          <li class="nav-item"><a href="hafta-6.html">Hafta 6</a></li>
+          <li class="nav-item"><a href="hafta-7.html">Hafta 7</a></li>
+          <li class="nav-item"><a href="hafta-8.html">Hafta 8</a></li>
+          <li class="nav-item"><a href="hafta-9.html">Hafta 9</a></li>
+          <li class="nav-item"><a href="hafta-10.html">Hafta 10</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===================================================================
+       KÜLTÜR HERO BÖLÜMÜ
+       =================================================================== -->
+  <main class="section">
+    <div class="cult-hero">
+      <span class="cult-badge-tag">🎭 3. Hafta Özel Bölümü</span>
+      <h1 class="hero-title" style="font-size: 2.8rem; margin-bottom: 1rem;">
+        Portekiz'in <span class="green">Büyüleyici</span> ve <span class="gold">Köklü</span> <span class="red">Kültürü</span>
+      </h1>
+      <p class="hero-desc" style="max-width: 820px; margin: 0 auto 1.75rem;">
+        Atlantik rüzgarları ve Akdeniz sıcaklığıyla harmanlanan Portekiz kültürü; Kuzey Minho'nun altın telkari işlemeli geleneksel elbiselerinden Lizbon sokaklarını inleten halk azizleri festivallerine, Keşifler Çağı'nın eşsiz Manuelin taş işçiliğinden mavi-beyaz Azulejo çinilerine uzanan eşsiz bir mirasa sahiptir.
+      </p>
+      
+      <!-- Hızlı Erişim Butonları -->
+      <div style="display: flex; gap: 0.85rem; justify-content: center; flex-wrap: wrap;">
+        <a href="#geleneksel-kiyafetler" class="btn btn-primary">👗 Geleneksel Kılık Kıyafet</a>
+        <a href="#bayramlar-festivaller" class="btn btn-gold">🎉 Bayramlar & Festivaller</a>
+        <a href="#mimari-kultur" class="btn btn-secondary">🏛️ Mimari Kültür & Sanat</a>
+        <a href="#kulturel-semboller" class="btn btn-primary">🏺 Kültürel Semboller</a>
+      </div>
+    </div>
+
+    <!-- ===================================================================
+         BENTO ÖZET KARTLAR (KÜLTÜREL TEMELLER)
+         =================================================================== -->
+    <div class="facts-grid" style="margin-bottom: 3.5rem;">
+      <div class="fact-card">
+        <div class="fact-icon">👗</div>
+        <div class="fact-label">Zengin Giyim Mirası</div>
+        <div class="fact-value">Yöresel Kostümler</div>
+        <div class="fact-note">Minho'nun altın işlemeli elbiselerinden Coimbra pelerinlerine uzanan asırlık kimlik.</div>
+      </div>
+      <div class="fact-card">
+        <div class="fact-icon">🎊</div>
+        <div class="fact-label">Yaşayan Bayramlar</div>
+        <div class="fact-value">Halk Festivalleri</div>
+        <div class="fact-note">Aziz António, São João, Tomar Tabuleiros ve meşaleli Braga ritüelleri.</div>
+      </div>
+      <div class="fact-card">
+        <div class="fact-icon">🏛️</div>
+        <div class="fact-label">Taşa Kazınan Sanat</div>
+        <div class="fact-value">Manuelin & Azulejo</div>
+        <div class="fact-note">Keşif denizciliğini taşa yansıtan Gotik süslemeler ve binlerce mavi-beyaz seramik çini.</div>
+      </div>
+      <div class="fact-card">
+        <div class="fact-icon">📜</div>
+        <div class="fact-label">Evrensel Değer</div>
+        <div class="fact-value">UNESCO Mirasları</div>
+        <div class="fact-note">Caretos karnavalı ve Jerónimos Manastırı gibi insanlığın ortak hazineleri.</div>
+      </div>
+    </div>
+
+    <!-- ===================================================================
+         KATEGORİ FİLTRELEME ÇUBUĞU
+         =================================================================== -->
+    <div class="filter-bar-container">
+      <button class="filter-pill-btn active" data-filter="all">🌐 Tümü</button>
+      <button class="filter-pill-btn" data-filter="kiyafet">👗 Geleneksel Kılık Kıyafet</button>
+      <button class="filter-pill-btn" data-filter="festival">🎉 Bayramlar & Festivaller</button>
+      <button class="filter-pill-btn" data-filter="mimari">🏛️ Mimari Kültür</button>
+    </div>
+
+    <!-- ===================================================================
+         BÖLÜM 1: GELENEKSEL KILIK KIYAFET (PORTEKİZ HALK GİYİMİ)
+         =================================================================== -->
+    <div id="geleneksel-kiyafetler" class="section-header" style="margin-bottom: 2rem;">
+      <span class="section-subtitle">1. Tematik Alan</span>
+      <h2 class="section-title">Portekiz'in Geleneksel Kılık Kıyafeti</h2>
+      <p class="section-desc">
+        Kuzeyin bereketli dağ vadilerinden güneyin engin ovalarına ve Atlantik adalarına kadar her bölge; toplumsal statüyü, ailevi mirası ve zanaatkarlığı yansıtan benzersiz giyim gelenekleri geliştirmiştir.
+      </p>
+    </div>
+
+    <!-- 1.1 Traje de Viana -->
+    <div class="cult-section-card filter-target" data-category="kiyafet">
+      <div class="cult-content-grid">
+        <div>
+          <span class="cult-badge-tag">👗 Kuzey Minho Zarafeti</span>
+          <h3 class="cult-card-title">Traje de Viana (Minho / Viana do Castelo Kostümü)</h3>
+          <p class="cult-card-desc">
+            Portekiz'in en ünlü ve ikonik halk kıyafeti olan <strong>Traje à Vianesa</strong>, Minho bölgesindeki kadınların tarlalarda çalışırken ve bayramlarda giydiği köklü bir geleneği temsil eder. Parlak kırmızı, siyah ve beyaz yün kumaşlardan dikilen kıyafet; el dokuması çiçek desenli geniş etekler, örme renkli önlükler (aventais) ve saçaklı baş örtüleriyle tamamlanır.
+          </p>
+          <p class="cult-card-desc">
+            Kıyafetin en görkemli parçası, göğsü kaplayan saf altından telkari kolyeler ve dünyaca ünlü <strong>Viana Kalbi (Coração de Viana)</strong> kolyeleridir. Bu altınlar aile mirası olarak anneden kıza aktarılır, genç kadının çeyizini ve bağımsızlığını simgeler.
+          </p>
+          <div class="cult-stats-row">
+            <div class="cult-stat-pill">
+              <div class="cult-stat-label">BÖLGE</div>
+              <div class="cult-stat-val">Viana do Castelo (Minho)</div>
+            </div>
+            <div class="cult-stat-pill" style="border-left-color: var(--pt-red);">
+              <div class="cult-stat-label">TEMEL MATERYAL</div>
+              <div class="cult-stat-val">El Dokuma Yün, Keten & Saf Altın</div>
+            </div>
+            <div class="cult-stat-pill" style="border-left-color: var(--pt-green);">
+              <div class="cult-stat-label">KULLANIM AMACI</div>
+              <div class="cult-stat-val">Hac, Düğün & Romaria Şenlikleri</div>
+            </div>
+          </div>
+        </div>
+        <div class="cult-img-wrap">
+          <img src="assets/images/traje-viana.jpg" alt="Traje de Viana Geleneksel Kostümü ve Desfile da Mordomia" class="cult-img culture-img">
+        </div>
+      </div>
+    </div>
+
+    <!-- 1.2 Capa e Batina -->
+    <div class="cult-section-card filter-target" data-category="kiyafet">
+      <div class="cult-content-grid reverse">
+        <div>
+          <span class="cult-badge-tag">🎓 Asırlık Akademi Geleneği</span>
+          <h3 class="cult-card-title">Capa e Batina (Coimbra Akademik Kıyafeti & Pelerin Kültürü)</h3>
+          <p class="cult-card-desc">
+            Avrupa'nın en eski üniversitelerinden biri olan 1290 kuruluşlu Coimbra Üniversitesi'nin öğrencileri tarafından yüzyıllardır giyilen <strong>Capa e Batina</strong>; siyah cübbe, beyaz gömlek, kravat ve omuzlardan sarkan uzun siyah yün pelerinden oluşur.
+          </p>
+          <p class="cult-card-desc">
+            <strong>Harry Potter Evrenine İlham:</strong> Yazar J.K. Rowling, 1990'ların başında Porto'da İngilizce öğretmenliği yaptığı dönemde bu pelerinli öğrencilerden derinden etkilenmiş ve Hogwarts öğrencilerinin cübbelerini tasarlarken Coimbra akademik kıyafetini model almıştır.
+          </p>
+          <p class="cult-card-desc">
+            Gelenekte bu pelerinler asla yıkanmaz; mezuniyete kadar öğrencinin yaşadığı tüm anıları, sevinçleri ve üniversite tozunu üzerinde taşır. Pelerinin eteğine atılan küçük yırtıklar ise aşıkları ve derin dostlukları simgeler.
+          </p>
+          <div class="cult-stats-row">
+            <div class="cult-stat-pill">
+              <div class="cult-stat-label">KÖKEN YILI</div>
+              <div class="cult-stat-val">1290'dan Günümüze</div>
+            </div>
+            <div class="cult-stat-pill" style="border-left-color: var(--pt-gold);">
+              <div class="cult-stat-label">KÜLTÜREL ETKİ</div>
+              <div class="cult-stat-val">Hogwarts Cübbelerinin İlham Kaynağı</div>
+            </div>
+            <div class="cult-stat-pill" style="border-left-color: var(--pt-red);">
+              <div class="cult-stat-label">GİYENLER</div>
+              <div class="cult-stat-val">Coimbra & Porto Üniversitesi Öğrencileri</div>
+            </div>
+          </div>
+        </div>
+        <div class="cult-img-wrap">
+          <img src="assets/images/capa-batina-coimbra.jpg" alt="Capa e Batina Coimbra Akademik Kıyafeti" class="cult-img culture-img">
+        </div>
+      </div>
+    </div>
+
+    <!-- 1.3 Caretos de Podence -->
+    <div class="cult-section-card filter-target" data-category="kiyafet">
+      <div class="cult-content-grid">
+        <div>
+          <span class="cult-badge-tag">👹 UNESCO Somut Olmayan Miras</span>
+          <h3 class="cult-card-title">Caretos de Podence (Trás-os-Montes Şeytani Karnaval Kostümü)</h3>
+          <p class="cult-card-desc">
+            Kuzeydoğu Portekiz'in dağlık Podence köyünde her yıl Karnaval döneminde (Entrudo Chocalheiro) ortaya çıkan <strong>Caretos</strong>; kırmızı, yeşil ve sarı kalın yün püsküllerle baştan aşağıya kaplanmış büyüleyici bir kostümdür.
+          </p>
+          <p class="cult-card-desc">
+            Bellerine deri kemerlerle bağlanan onlarca pirinç inek çıngırağı (chocalhos) ve tenekeden veya deriden yapılan sivri burunlu şeytani maskeleriyle sokaklarda zıplayarak koşarlar. Bu arkaik ritüel; kışın soğuk karanlığını kovup baharın bereketini uyandırmayı ve toplumu arındırmayı amaçlar.
+          </p>
+          <p class="cult-card-desc">
+            Bu asırlık halk ritüeli ve eşsiz kıyafet geleneği, 2019 yılında UNESCO tarafından <strong>İnsanlığın Somut Olmayan Kültürel Mirası</strong> olarak tescil edilmiştir.
+          </p>
+          <div class="cult-stats-row">
+            <div class="cult-stat-pill">
+              <div class="cult-stat-label">BÖLGE</div>
+              <div class="cult-stat-val">Podence (Trás-os-Montes)</div>
+            </div>
+            <div class="cult-stat-pill" style="border-left-color: var(--pt-gold);">
+              <div class="cult-stat-label">UNESCO STATÜSÜ</div>
+              <div class="cult-stat-val">2019 Tescilli Somut Olmayan Miras</div>
+            </div>
+            <div class="cult-stat-pill" style="border-left-color: var(--pt-green);">
+              <div class="cult-stat-label">SEMBOLLER</div>
+              <div class="cult-stat-val">Yün Püsküller, Çıngıraklar & Maske</div>
+            </div>
+          </div>
+        </div>
+        <div class="cult-img-wrap">
+          <img src="assets/images/caretos-podence.jpg" alt="Caretos de Podence Karnaval Kostümü" class="cult-img culture-img">
+        </div>
+      </div>
+    </div>
+
+    <!-- 1.4 Campino do Ribatejo -->
+    <div class="cult-section-card filter-target" data-category="kiyafet">
+      <div class="cult-content-grid reverse">
+        <div>
+          <span class="cult-badge-tag">🐎 Tejo Ovası Atlı Çobanı</span>
+          <h3 class="cult-card-title">Campino do Ribatejo (Geleneksel Çoban & Atlı Kostümü)</h3>
+          <p class="cult-card-desc">
+            Tejo Nehri kıyısındaki verimli Ribatejo düzlüklerinde serbestçe otlayan dövüş boğalarını ve asil Lusitano atlarını güden geleneksel Portekiz kovboylarına <strong>Campino</strong> denir.
+          </p>
+          <p class="cult-card-desc">
+            Campino kıyafeti son derece katı kurallara ve zengin renklere sahiptir: Başa takılan uzun sarkık uçlu yeşil örgü bere ve ucundaki kırmızı ponpon (barrete verde), göz alıcı kırmızı yün yelek (colete encarnado), dik yakalı beyaz gömlek, diz altı lacivert pantolon, beyaz yün çoraplar ve mahmuzlu siyah çizmeler.
+          </p>
+          <p class="cult-card-desc">
+            Campino'lar at üzerindeyken sürüleri yönlendirmek ve olası boğa saldırılarını savuşturmak için ellerinde <strong>pampilho</strong> adı verilen 3 metrelik özel ahşap mızraklar taşırlar.
+          </p>
+          <div class="cult-stats-row">
+            <div class="cult-stat-pill">
+              <div class="cult-stat-label">BÖLGE</div>
+              <div class="cult-stat-val">Ribatejo (Tejo Havzası)</div>
+            </div>
+            <div class="cult-stat-pill" style="border-left-color: var(--pt-red);">
+              <div class="cult-stat-label">İKONİK PARÇA</div>
+              <div class="cult-stat-val">Barrete Verde (Yeşil Kırmızı Bere)</div>
+            </div>
+            <div class="cult-stat-pill" style="border-left-color: var(--pt-gold);">
+              <div class="cult-stat-label">EKİPMAN</div>
+              <div class="cult-stat-val">Pampilho (Uzun Çoban Mızrağı)</div>
+            </div>
+          </div>
+        </div>
+        <div class="cult-img-wrap">
+          <img src="assets/images/campino-ribatejo.jpg" alt="Campino do Ribatejo Geleneksel Atlı Kostümü" class="cult-img culture-img">
+        </div>
+      </div>
+    </div>
+
+    <!-- 1.5 Diğer Bölgesel Kıyafetler (Varina, Madeira & Azorlar) -->
+    <div class="cult-section-card filter-target" data-category="kiyafet" style="background: rgba(14, 28, 20, 0.95);">
+      <div style="padding: 2.5rem;">
+        <span class="cult-badge-tag">🌊 Kıyı & Ada Giysileri</span>
+        <h3 class="cult-card-title">Portekiz'in Diğer Özgün Giyim Gelenekleri</h3>
+        <p class="cult-card-desc">
+          Portekiz'in kıyı kasabalarında ve okyanus adalarında yaşam koşulları giyimi doğrudan şekillendirmiştir:
+        </p>
+
+        <div class="arch-features-grid">
+          <div class="arch-feature-box">
+            <div class="arch-feature-icon">🐟</div>
+            <h4 class="arch-feature-title">Varinas (Lizbon Balıkçı Kadınları)</h4>
+            <p class="arch-feature-desc">
+              Lizbon sahilinde taze balık satan güçlü kadın figürü. Başlarının üzerine koydukları yuvarlak kumaş yastık (rodilha) üstünde ağır sepetleri dimdik bir zarafetle taşırlar. Kısa dökümlü etekleri ve kendinden emin yürüyüşleriyle Lizbon folklorunun simgesidir.
+            </p>
+          </div>
+          <div class="arch-feature-box">
+            <div class="arch-feature-icon">⛰️</div>
+            <h4 class="arch-feature-title">Traje da Madeira & Carapuça</h4>
+            <p class="arch-feature-desc">
+              Madeira Adası'nın geleneksel giysisi; parlak kırmızı çizgili yün etekler, beyaz keten bluzlar ve başa takılan huni benzeri sivri uçlu minyatür yün şapkası (Carapuça) ile tanınır.
+            </p>
+          </div>
+          <div class="arch-feature-box">
+            <div class="arch-feature-icon">🐋</div>
+            <h4 class="arch-feature-title">Capote e Capelo dos Açores</h4>
+            <p class="arch-feature-desc">
+              Azor Adaları'nda 20. yüzyıl ortalarına kadar giyilen koyu mavi/siyah pelerin. Balina kemiğinden yapılan devasa kukuletası kadının yüzünü tamamen gölgede bırakarak Atlantik rüzgarlarından ve bakışlardan korurdu.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================================================================
+         BÖLÜM 2: GELENEKSEL BAYRAMLAR VE FESTİVALLER
+         =================================================================== -->
+    <div id="bayramlar-festivaller" class="section-header" style="margin-top: 5rem; margin-bottom: 2rem;">
+      <span class="section-subtitle">2. Tematik Alan</span>
+      <h2 class="section-title">Geleneksel Bayramlar ve Festivaller</h2>
+      <p class="section-desc">
+        Portekiz'de festivaller sadece dini kutlamalar değil; sokakların dans pistine dönüştüğü, havai fişeklerin gökyüzünü yaktığı ve asırlık toplumsal ritüellerin coşkuyla yaşatıldığı milli karnavallardır.
+      </p>
+    </div>
+
+    <!-- 2.1 Festa de Santo António (Lizbon) -->
+    <div class="cult-section-card filter-target" data-category="festival">
+      <div class="cult-content-grid">
+        <div>
+          <span class="cult-badge-tag">🎆 Lizbon'un En Büyük Şenliği</span>
+          <h3 class="cult-card-title">Festa de Santo António (Lizbon - Halk Azizleri Bayramı)</h3>
+          <p class="cult-card-desc">
+            Her yıl 12-13 Haziran tarihlerinde kutlanan <strong>Festa de Santo António</strong>, Lizbon halkının koruyucu azizine adadığı yılın en renkli ve çılgın sokak festivalidir. Başkentin tarihi Alfama, Mouraria, Graça ve Bica mahalleleri rengarenk kağıt fenerler, çiçekler ve flamalarla baştan başa donatılır.
+          </p>
+          <p class="cult-card-desc">
+            <strong>Marchas Populares Korteji:</strong> 12 Haziran gecesi tüm mahalleler görkemli elbiseler dikip Avenida da Liberdade bulvarında müzik eşliğinde yarışır. Aşıklar birbirlerine küçük yeşil fesleğen saksıları (<strong>manjerico</strong>) ve üzerine kafiyeli aşk manileri (quadras) iliştirilmiş kağıt karanfiller hediye eder.
+          </p>
+          <p class="cult-card-desc">
+            Ayrıca Aziz António'nun "evlilik azizi" olduğuna inanıldığı için belediye tarafından onlarca çiftin katıldığı geleneksel <strong>Casamentos de Santo António (Toplu Halk Nikahı)</strong> düzenlenir.
+          </p>
+          <div class="cult-stats-row">
+            <div class="cult-stat-pill">
+              <div class="cult-stat-label">TARİH</div>
+              <div class="cult-stat-val">12 - 13 Haziran Her Yıl</div>
+            </div>
+            <div class="cult-stat-pill" style="border-left-color: var(--pt-red);">
+              <div class="cult-stat-label">MERKEZ MAHALLE</div>
+              <div class="cult-stat-val">Alfama & Mouraria (Lizbon)</div>
+            </div>
+            <div class="cult-stat-pill" style="border-left-color: var(--pt-gold);">
+              <div class="cult-stat-label">SİMGELER</div>
+              <div class="cult-stat-val">Manjerico Fesleğeni, Mahalle Korteji</div>
+            </div>
+          </div>
+        </div>
+        <div class="cult-img-wrap">
+          <img src="assets/images/festa-santo-antonio.jpg" alt="Lizbon Festa de Santo Antonio Dini ve Halk Kutlamaları" class="cult-img culture-img">
+        </div>
+      </div>
+    </div>
+
+    <!-- 2.2 Festa de São João do Porto -->
+    <div class="cult-section-card filter-target" data-category="festival">
+      <div class="cult-content-grid reverse">
+        <div>
+          <span class="cult-badge-tag">🔨 Porto'nun Büyülü Gecesi</span>
+          <h3 class="cult-card-title">Festa de São João do Porto (Porto Aziz João Festivali)</h3>
+          <p class="cult-card-desc">
+            23-24 Haziran gecesi Porto sokaklarında patlayan <strong>São João</strong>, Avrupa'nın en neşeli ve samimi sokak kutlamalarından biridir. Yüz binlerce insan Douro Nehri kıyısına (Ribeira) dökülür ve sabahın ilk ışıklarına kadar dans eder.
+          </p>
+          <p class="cult-card-desc">
+            <strong>Plastik Çekiç Geleneği (Martelinhos):</strong> Yoldan geçen herkes, birbirinin başına vıy vıy ses çıkaran yumuşak plastik çekiçlerle şakayla vurur; bu hareket iyi şans ve dostluk dileğini temsil eder. Eski pagan döneminde ise sarımsak çiçeği koklatılırdı.
+          </p>
+          <p class="cult-card-desc">
+            Gece yarısı binlerce parıldayan kağıt sıcak hava balonu (<strong>balões de São João</strong>) gökyüzüne salınır ve tarihi Dom Luís I Köprüsü üzerinde muhteşem bir havai fişek ve müzik senfonisi icra edilir.
+          </p>
+          <div class="cult-stats-row">
+            <div class="cult-stat-pill">
+              <div class="cult-stat-label">TARİH</div>
+              <div class="cult-stat-val">23 - 24 Haziran Gecesi</div>
+            </div>
+            <div class="cult-stat-pill" style="border-left-color: var(--pt-gold);">
+              <div class="cult-stat-label">EN ÜNLÜ ADET</div>
+              <div class="cult-stat-val">Plastik Çekiçle (Martelinho) Vurma</div>
+            </div>
+            <div class="cult-stat-pill" style="border-left-color: var(--pt-green);">
+              <div class="cult-stat-label">GÖKYÜZÜ GÖSTERİSİ</div>
+              <div class="cult-stat-val">Dilek Balonları & Köprü Fişekleri</div>
+            </div>
+          </div>
+        </div>
+        <div class="cult-img-wrap">
+          <img src="assets/images/festa-sao-joao.jpg" alt="Porto Festa de Sao Joao Sokak Kutlamaları" class="cult-img culture-img">
+        </div>
+      </div>
+    </div>
+
+    <!-- 2.3 Festa dos Tabuleiros (Tomar) -->
+    <div class="cult-section-card filter-target" data-category="festival">
+      <div class="cult-content-grid">
+        <div>
+          <span class="cult-badge-tag">🧺 Dünyada Eşi Olmayan Ritüel</span>
+          <h3 class="cult-card-title">Festa dos Tabuleiros (Tomar - Tepsi & Ekmek Festivali)</h3>
+          <p class="cult-card-desc">
+            Orta Portekiz'in tarihi Tomar kentinde <strong>her dört yılda bir Temmuz ayında</strong> düzenlenen Festa dos Tabuleiros, kökleri 14. yüzyıl Kraliçe Aziz İsabel ve Kutsal Ruh Tarikatı'na uzanan pagan ve Hristiyan sentezi olağanüstü bir halk bayramıdır.
+          </p>
+          <p class="cult-card-desc">
+            Festivalin ana geçit töreninde yüzlerce genç kadın, başlarının üzerinde kendi boylarına eşit ve yaklaşık <strong>15 kilogram ağırlığında</strong> olan devasa taç kuleler (tabuleiros) taşır. Bu kuleler; kamış iskelet üzerine dizilmiş 30 adet somun ekmek, binlerce el yapımı renkli kağıt çiçek, buğday başakları ve en tepesinde beyaz bir barış güvercini veya Mesih Haçı ile donatılır.
+          </p>
+          <p class="cult-card-desc">
+            Geleneksel beyaz elbiseli kızlara koyu takım elbiseli partnerleri eşlik eder; saatlerce süren bu büyüleyici denge yürüyüşü Tomar sokaklarını bir açık hava sanat galerisine çevirir.
+          </p>
+          <div class="cult-stats-row">
+            <div class="cult-stat-pill">
+              <div class="cult-stat-label">DÜZENLENME SIKLIĞI</div>
+              <div class="cult-stat-val">Her 4 Yılda Bir (Temmuz)</div>
+            </div>
+            <div class="cult-stat-pill" style="border-left-color: var(--pt-gold);">
+              <div class="cult-stat-label">TAŞINAN AĞIRLIK</div>
+              <div class="cult-stat-val">~15 kg (30 Ekmek Somunu & Çiçekler)</div>
+            </div>
+            <div class="cult-stat-pill" style="border-left-color: var(--pt-red);">
+              <div class="cult-stat-label">ŞEHİR</div>
+              <div class="cult-stat-val">Tomar (Tapınak Şövalyeleri Kenti)</div>
+            </div>
+          </div>
+        </div>
+        <div class="cult-img-wrap">
+          <img src="assets/images/festa-tabuleiros.jpg" alt="Festa dos Tabuleiros Tomar Tepsi Festivali" class="cult-img culture-img">
+        </div>
+      </div>
+    </div>
+
+    <!-- 2.4 Semana Santa de Braga -->
+    <div class="cult-section-card filter-target" data-category="festival">
+      <div class="cult-content-grid reverse">
+        <div>
+          <span class="cult-badge-tag">🔥 Meşaleli Gece Töreni</span>
+          <h3 class="cult-card-title">Semana Santa de Braga (Braga Kutsal Hafta Kutlamaları)</h3>
+          <p class="cult-card-desc">
+            Portekiz'in manevi başkenti olarak anılan Braga'da Paskalya öncesindeki Kutsal Hafta, tüm ülkenin en görkemli ve mistik dini törenlerine sahne olur.
+          </p>
+          <p class="cult-card-desc">
+            <strong>Procissão do Fogaréu ve Farricocos:</strong> Çarşamba gecesi sokak aydınlatmaları tamamen kapatılır. Çıplak ayaklı, başlarına sivri koni siyah kukuletalar geçirmiş kefaret alayı (Farricocos), ellerinde alev alev yanan katranlı dev meşaleler ve çan sesleriyle sessiz sokakları aydınlatır.
+          </p>
+          <p class="cult-card-desc">
+            Ayrıca şehir halkı günlerce çalışarak sokakları taze çiçek yaprakları, aromatik çam iğneleri ve renkli talaşlarla bezenmiş kilometrelerce uzunlukta dini mozaik halılarla (tapetes floridos) kaplar.
+          </p>
+          <div class="cult-stats-row">
+            <div class="cult-stat-pill">
+              <div class="cult-stat-label">DÖNEM</div>
+              <div class="cult-stat-val">Paskalya Öncesi Kutsal Hafta</div>
+            </div>
+            <div class="cult-stat-pill" style="border-left-color: var(--pt-red);">
+              <div class="cult-stat-label">MİSTİK FİGÜR</div>
+              <div class="cult-stat-val">Farricocos (Meşaleli Kukuletalılar)</div>
+            </div>
+            <div class="cult-stat-pill" style="border-left-color: var(--pt-green);">
+              <div class="cult-stat-label">SANAT</div>
+              <div class="cult-stat-val">Doğal Çiçek Halıları (Tapetes Floridos)</div>
+            </div>
+          </div>
+        </div>
+        <div class="cult-img-wrap">
+          <img src="assets/images/braga-semana-santa.jpg" alt="Semana Santa de Braga Farricocos Meşale Alayı" class="cult-img culture-img">
+        </div>
+      </div>
+    </div>
+
+    <!-- 2.5 Diğer Kutlamalar: Queima das Fitas & Romaria da Agonia -->
+    <div class="cult-section-card filter-target" data-category="festival" style="background: rgba(14, 28, 20, 0.95);">
+      <div style="padding: 2.5rem;">
+        <span class="cult-badge-tag">🎺 Öğrenci ve Hac Şenlikleri</span>
+        <h3 class="cult-card-title">Portekiz'in Diğer Büyük Festivalleri</h3>
+        <p class="cult-card-desc">
+          Ülkenin dört bir yanında gençlik ve inanç ateşiyle yanan diğer simgesel kutlamalar:
+        </p>
+
+        <div class="arch-features-grid">
+          <div class="arch-feature-box">
+            <div class="arch-feature-icon">🎗️</div>
+            <h4 class="arch-feature-title">Queima das Fitas (Şerit Yakma Festivali)</h4>
+            <p class="arch-feature-desc">
+              Mayıs ayında Coimbra ve Porto üniversitelerinde mezun öğrencilerin fakülte renklerindeki kurdeleleri dev kazanlarda yakarak mezuniyeti kutladığı 1 haftalık öğrenci karnavalı. Gece yarısı eski katedral basamaklarında söylenen Coimbra Fado serenatları tüyleri diken diken eder.
+            </p>
+          </div>
+          <div class="arch-feature-box">
+            <div class="arch-feature-icon">⚓</div>
+            <h4 class="arch-feature-title">Romaria d'Agonia (Viana do Castelo)</h4>
+            <p class="arch-feature-desc">
+              Ağustos ayında düzenlenen Portekiz'in en büyük folklorik hac bayramı. Balıkçı teknelerinin çiçeklerle donatıldığı nehir geçitleri ve binlerce genç kadının boyunlarında yüz binlerce euro değerinde telkari altınla yürüdüğü görkemli Mordomia Geçidi ile ünlüdür.
+            </p>
+          </div>
+          <div class="arch-feature-box">
+            <div class="arch-feature-icon">🎭</div>
+            <h4 class="arch-feature-title">Torres Vedras & Loulé Karnavalları</h4>
+            <p class="arch-feature-desc">
+              Portekiz'in en hicivli ve eğlenceli sokak karnavalları. Politikacıların dev karikatür maketleri (Matrafonas) ve yerel Zés Pereiras davulcularının ritimleri eşliğinde yüz binlerce insan günlerce sokaklarda eğlenir.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================================================================
+         BÖLÜM 3: MİMARİ KÜLTÜR (PORTEKİZ'İN TAŞ VE ÇİNİ MİRASI)
+         =================================================================== -->
+    <div id="mimari-kultur" class="section-header" style="margin-top: 5rem; margin-bottom: 2rem;">
+      <span class="section-subtitle">3. Tematik Alan</span>
+      <h2 class="section-title">Portekiz Mimari Kültürü ve Anıtsal Mirası</h2>
+      <p class="section-desc">
+        Keşifler Çağı'nın okyanus zaferlerini taşa işleyen Manuelin tarzı, binaların cephelerine hikayeler anlatan mavi-beyaz çiniler ve büyük deprem sonrası doğan öncü mühendislik harikaları.
+      </p>
+    </div>
+
+    <!-- 3.1 Manuelin Tarzı Mimari -->
+    <div class="cult-section-card filter-target" data-category="mimari">
+      <div class="cult-content-grid">
+        <div>
+          <span class="cult-badge-tag">⚓ Dünyada Tek: Keşifler Gotik Mimarisi</span>
+          <h3 class="cult-card-title">Manuelin Mimarisi (Estilo Manuelino)</h3>
+          <p class="cult-card-desc">
+            16. yüzyıl başında Kral I. Manuel'in saltanatında doğan ve <strong>dünyada yalnızca Portekiz'e özgü</strong> olan Manuelin tarzı, Geç Gotik ile Rönesans'ın okyanus denizciliğiyle birleşimidir.
+          </p>
+          <p class="cult-card-desc">
+            Taş ustaları; gemi halatlarını (cordas), yosunları, midye kabuklarını, mercan resiflerini, deniz fenerlerini, krallığın amblemi olan <strong>Halkalı Küre'yi (Esfera Armilar)</strong> ve Mesih Haçı'nı dantel gibi kireçtaşına işlemiştir.
+          </p>
+          <p class="cult-card-desc">
+            <strong>Şaheserler:</strong> Lizbon'da UNESCO Dünya Mirası olan <strong>Mosteiro dos Jerónimos</strong> ve <strong>Torre de Belém</strong> ile Tomar'daki İsa Manastırı'nın dünyaca ünlü bölüm penceresi (Janela do Capítulo de Tomar) bu mimarinin zirvesini oluşturur.
+          </p>
+          <div class="cult-stats-row">
+            <div class="cult-stat-pill">
+              <div class="cult-stat-label">DÖNEM</div>
+              <div class="cult-stat-val">1495 - 1521 (I. Manuel Dönemi)</div>
+            </div>
+            <div class="cult-stat-pill" style="border-left-color: var(--pt-gold);">
+              <div class="cult-stat-label">TAŞTAKİ MOTİFLER</div>
+              <div class="cult-stat-val">Gemi Halatları, Mercanlar, Küre</div>
+            </div>
+            <div class="cult-stat-pill" style="border-left-color: var(--pt-green);">
+              <div class="cult-stat-label">BAŞYAPIT</div>
+              <div class="cult-stat-val">Jerónimos Manastırı & Belém Kulesi</div>
+            </div>
+          </div>
+        </div>
+        <div class="cult-img-wrap">
+          <img src="assets/images/jeronimos-manuelino.jpg" alt="Manuelin Mimari Jeronimos Manastiri" class="cult-img culture-img">
+        </div>
+      </div>
+    </div>
+
+    <!-- 3.2 Belém Kulesi Vurgusu -->
+    <div class="cult-section-card filter-target" data-category="mimari">
+      <div class="cult-content-grid reverse">
+        <div>
+          <span class="cult-badge-tag">🏰 Atlantik'in Taş Muhafızı</span>
+          <h3 class="cult-card-title">Torre de Belém (Belém Kulesi ve Askeri Mimari)</h3>
+          <p class="cult-card-desc">
+            1514-1519 yılları arasında Tejo Nehri'nin Lizbon girişini korumak amacıyla inşa edilen <strong>Torre de Belém</strong>, askeri savunma mimarisi ile Manuelin estetiğinin dünyadaki en kusursuz örneğidir.
+          </p>
+          <p class="cult-card-desc">
+            Kule; Mağribi gözetleme kubbeleri, Venedik tarzı loggialar, kalkanlar üzerine oyulmuş Mesih Tarikatı haçları ve deniz seviyesindeki topçu bataryalarıyla donatılmıştır. Kaşiflerin okyanuslara yelken açtığı ve eve dönüşte ilk gördükleri kutsal karşılama simgesidir.
+          </p>
+          <div class="cult-stats-row">
+            <div class="cult-stat-pill">
+              <div class="cult-stat-label">MİMAR</div>
+              <div class="cult-stat-val">Francisco de Arruda</div>
+            </div>
+            <div class="cult-stat-pill" style="border-left-color: var(--pt-gold);">
+              <div class="cult-stat-label">UNESCO YILI</div>
+              <div class="cult-stat-val">1983 (Dünya Mirası)</div>
+            </div>
+            <div class="cult-stat-pill" style="border-left-color: var(--pt-red);">
+              <div class="cult-stat-label">KONUM</div>
+              <div class="cult-stat-val">Tejo Nehri Ağzı, Lizbon</div>
+            </div>
+          </div>
+        </div>
+        <div class="cult-img-wrap">
+          <img src="assets/images/belem-tower.jpg" alt="Torre de Belem Manuelin Savunma Kulesi" class="cult-img culture-img">
+        </div>
+      </div>
+    </div>
+
+    <!-- 3.3 Azulejo Çini Sanatı -->
+    <div class="cult-section-card filter-target" data-category="mimari">
+      <div class="cult-content-grid">
+        <div>
+          <span class="cult-badge-tag">🎨 Mavi-Beyaz Seramik Şiiri</span>
+          <h3 class="cult-card-title">Azulejo Sanatı (Geleneksel Portekiz Çinileri)</h3>
+          <p class="cult-card-desc">
+            Arapça kökenli <em>"al-zulayj"</em> (cilalı küçük taş) sözcüğünden gelen <strong>Azulejo</strong>, 500 yıldır Portekiz'in kiliselerini, saraylarını, tren garlarını ve konut cephelerini kaplayan ulusal görsel kimliğidir.
+          </p>
+          <p class="cult-card-desc">
+            17. ve 18. yüzyılda Hollanda Delft porselenlerinden ve Uzak Doğu motiflerinden esinlenerek karakteristik mavi-beyaz (azul e branco) tona evrilmiştir. Bu çiniler binaları yazın sıcaktan, kışın Atlantik neminden korumakla kalmaz; devasa panolar halinde savaşları, keşif seferlerini ve kutsal efsaneleri görsel bir roman gibi anlatır.
+          </p>
+          <p class="cult-card-desc">
+            <strong>Porto São Bento Tren Garı:</strong> Jorge Colaço tarafından yapılan ve yaklaşık <strong>20.000 el boyaması çiniden oluşan</strong> istasyon salonu, Portekiz tarihinin en görkemli savaşlarını gözler önüne serer ve dünyanın en güzel garlarından biri kabul edilir.
+          </p>
+          <div class="cult-stats-row">
+            <div class="cult-stat-pill">
+              <div class="cult-stat-label">SANAT FORMU</div>
+              <div class="cult-stat-val">Pişmiş Toprak & Kalaylı Sır (Majolika)</div>
+            </div>
+            <div class="cult-stat-pill" style="border-left-color: var(--pt-gold);">
+              <div class="cult-stat-label">SÃO BENTO ÇİNİ SAYISI</div>
+              <div class="cult-stat-val">20.000 Adet El Boyaması Çini</div>
+            </div>
+            <div class="cult-stat-pill" style="border-left-color: var(--pt-green);">
+              <div class="cult-stat-label">KORUMA KANUNU</div>
+              <div class="cult-stat-val">Tarihi Çinilerin Sökülmesi Yasak</div>
+            </div>
+          </div>
+        </div>
+        <div class="cult-img-wrap">
+          <img src="assets/images/sao-bento-azulejos.jpg" alt="Porto Sao Bento Tren Garı Azulejo Panoları" class="cult-img culture-img">
+        </div>
+      </div>
+    </div>
+
+    <!-- 3.4 Pombalin Mimarlık & Depreme Karşı Ahşap Kafes -->
+    <div class="cult-section-card filter-target" data-category="mimari">
+      <div class="cult-content-grid reverse">
+        <div>
+          <span class="cult-badge-tag">📐 Dünyanın İlk Depreme Dayanıklı Şehri</span>
+          <h3 class="cult-card-title">Pombalin Mimarlık ve "Gaiola Pombalina"</h3>
+          <p class="cult-card-desc">
+            1 Kasım 1755'te başkent Lizbon'u yerle bir eden 8.7 büyüklüğündeki büyük deprem ve tsunaminin ardından, Başbakan Marquês de Pombal öncülüğünde hayata geçirilen şehirleşme tarzıdır.
+          </p>
+          <p class="cult-card-desc">
+            <strong>Gaiola Pombalina (Pombalin Kafesi):</strong> Binaların duvarları içine gizlenen esnek ahşap kafes strüktürü, dünyadaki <strong>ilk depreme dayanıklı önü kesici mühendislik icadıdır</strong>. Deprem anında binanın esneyip yıkılmasını önleyen bu modeller, askeri birliklerin maketler etrafında ritmik yürüyüşler yapmasıyla sarsıntı testlerinden geçirilmiştir.
+          </p>
+          <p class="cult-card-desc">
+            Baixa bölgesinin ızgara planlı geniş caddeleri, yangın sıçramasını önleyen yüksek taş bölme duvarları ve Praça do Comércio meydanı, modern kentsel planlamanın dünyadaki ilk örneklerindendir.
+          </p>
+          <div class="cult-stats-row">
+            <div class="cult-stat-pill">
+              <div class="cult-stat-label">TARİHİ DÖNÜM NOKTASI</div>
+              <div class="cult-stat-val">1755 Lizbon Depremi Sonrası</div>
+            </div>
+            <div class="cult-stat-pill" style="border-left-color: var(--pt-gold);">
+              <div class="cult-stat-label">MÜHENDİSLİK BULUŞU</div>
+              <div class="cult-stat-val">Gaiola Pombalina (Esnek Ahşap Kafes)</div>
+            </div>
+            <div class="cult-stat-pill" style="border-left-color: var(--pt-red);">
+              <div class="cult-stat-label">ŞEHİR DOKUSU</div>
+              <div class="cult-stat-val">Izgara Planlı Baixa Lizbon</div>
+            </div>
+          </div>
+        </div>
+        <div class="cult-img-wrap">
+          <img src="assets/images/lisbon-earthquake-1755.jpg" alt="1755 Lizbon Depremi ve Pombalin Yeniden Yapılanma" class="cult-img culture-img">
+        </div>
+      </div>
+    </div>
+
+    <!-- 3.5 Portekiz Baroku & Talha Dourada -->
+    <div class="cult-section-card filter-target" data-category="mimari">
+      <div class="cult-content-grid">
+        <div>
+          <span class="cult-badge-tag">✨ Altın Kaplama Ahşap Zirvesi</span>
+          <h3 class="cult-card-title">Portekiz Baroku ve "Talha Dourada" Sanatı</h3>
+          <p class="cult-card-desc">
+            18. yüzyılda Kral V. João döneminde Brezilya'dan gelen tonlarca altının ülkeye akmasıyla Portekiz, Avrupa'nın en zengin Barok ve Rokoko mimari eserlerini inşa etmiştir.
+          </p>
+          <p class="cult-card-desc">
+            <strong>Talha Dourada (Yaldızlı Ahşap Oymacılık):</strong> Ahşabın ince ince oyulduktan sonra üzerine som altın varakların yapıştırılması sanatıdır. Porto'daki <strong>Igreja de São Francisco</strong> kilisesinin içi adeta saf altından bir mücevher kutusudur; tonozlar, sütunlar ve heykellerde yaklaşık <strong>300 kilogram saf altın</strong> kullanılmıştır.
+          </p>
+          <p class="cult-card-desc">
+            Ayrıca Braga'daki <strong>Bom Jesus do Monte</strong> tapınağının granit heykeller ve çeşmelerle bezeli devasa zikzak Barok merdivenleri, UNESCO Dünya Mirası olarak kabul edilmektedir.
+          </p>
+          <div class="cult-stats-row">
+            <div class="cult-stat-pill">
+              <div class="cult-stat-label">SANAT TEKNİĞİ</div>
+              <div class="cult-stat-val">Talha Dourada (Altın Varak Oymacılık)</div>
+            </div>
+            <div class="cult-stat-pill" style="border-left-color: var(--pt-gold);">
+              <div class="cult-stat-label">KULLANILAN ALTIN</div>
+              <div class="cult-stat-val">São Francisco Kilisesi'nde ~300 kg</div>
+            </div>
+            <div class="cult-stat-pill" style="border-left-color: var(--pt-green);">
+              <div class="cult-stat-label">ANITSAL MERDİVEN</div>
+              <div class="cult-stat-val">Bom Jesus do Monte (Braga)</div>
+            </div>
+          </div>
+        </div>
+        <div class="cult-img-wrap">
+          <img src="assets/images/talha-dourada-porto.jpg" alt="Igreja de Sao Francisco Porto Talha Dourada Altin Barok" class="cult-img culture-img">
+        </div>
+      </div>
+    </div>
+
+    <!-- 3.6 Geleneksel Bölgesel Ev Mimarisi (Santana & Costa Nova) -->
+    <div class="cult-section-card filter-target" data-category="mimari">
+      <div class="cult-content-grid reverse">
+        <div>
+          <span class="cult-badge-tag">🏡 Kırsal Masal Kulübeleri</span>
+          <h3 class="cult-card-title">Casas de Santana (Madeira Üçgen Saz Evleri)</h3>
+          <p class="cult-card-desc">
+            Madeira Adası'nın kuzeyindeki Santana kasabasında yer alan geleneksel <strong>Casas Típicas de Santana</strong>, üçgen piramidal biçimleri ve yere kadar inen kalın saz çatılarıyla masalsı bir görünüme sahiptir.
+          </p>
+          <p class="cult-card-desc">
+            Bu evler bölgenin bol yağış alan dik yamaçlarına uyum sağlamak üzere tasarlanmıştır; eğimli saz çatılar yağmur suyunun hızla akmasını sağlar ve iç mekanı kışın sıcak, yazın serin tutar. Ahşap cepheler geleneksel olarak kırmızı, beyaz ve parlak kobalt mavisine boyanır.
+          </p>
+          <div class="cult-stats-row">
+            <div class="cult-stat-pill">
+              <div class="cult-stat-label">BÖLGE</div>
+              <div class="cult-stat-val">Santana (Madeira Adası)</div>
+            </div>
+            <div class="cult-stat-pill" style="border-left-color: var(--pt-red);">
+              <div class="cult-stat-label">ÇATI YAPISI</div>
+              <div class="cult-stat-val">Doğal Saz (Palha) Örtü</div>
+            </div>
+            <div class="cult-stat-pill" style="border-left-color: var(--pt-gold);">
+              <div class="cult-stat-label">KARAKTERİSTİK</div>
+              <div class="cult-stat-val">Üçgen Geometrik Ahşap Yapı</div>
+            </div>
+          </div>
+        </div>
+        <div class="cult-img-wrap">
+          <img src="assets/images/santana-casas.jpg" alt="Casas Tipicas de Santana Madeira Adasi" class="cult-img culture-img">
+        </div>
+      </div>
+    </div>
+
+    <!-- 3.7 Palheiros da Costa Nova (Aveiro) -->
+    <div class="cult-section-card filter-target" data-category="mimari">
+      <div class="cult-content-grid">
+        <div>
+          <span class="cult-badge-tag">🎨 Çizgili Sahil Kulübeleri</span>
+          <h3 class="cult-card-title">Palheiros da Costa Nova (Aveiro Çizgili Evleri)</h3>
+          <p class="cult-card-desc">
+            Aveiro lagünü kenarındaki Costa Nova do Prado sahilinde sıralanan <strong>Palheiros</strong>, dikey ve yatay rengarenk çizgileriyle (kırmızı-beyaz, mavi-beyaz, yeşil-beyaz, sarı-beyaz) dünyanın en fotojenik balıkçı mimarisidir.
+          </p>
+          <p class="cult-card-desc">
+            19. yüzyılda yerel balıkçılar tarafından ağlarını, oltalarını ve teknelerini saklamak için ahşap depolar olarak inşa edilmiş, daha sonra sahil yazlıklarına dönüştürülmüştür. Çizgili parlak renkler, sisli Atlantik sabahlarında balıkçıların denizden dönerken kendi evlerini kolayca seçebilmesini sağlardı.
+          </p>
+          <div class="cult-stats-row">
+            <div class="cult-stat-pill">
+              <div class="cult-stat-label">BÖLGE</div>
+              <div class="cult-stat-val">Costa Nova (Aveiro Lagünü)</div>
+            </div>
+            <div class="cult-stat-pill" style="border-left-color: var(--pt-gold);">
+              <div class="cult-stat-label">ORİJİNAL İŞLEV</div>
+              <div class="cult-stat-val">Balıkçı Ağ & Malzeme Deposu</div>
+            </div>
+            <div class="cult-stat-pill" style="border-left-color: var(--pt-green);">
+              <div class="cult-stat-label">DESEN TİPİ</div>
+              <div class="cult-stat-val">Dikey & Yatay Çizgili Ahşap</div>
+            </div>
+          </div>
+        </div>
+        <div class="cult-img-wrap">
+          <img src="assets/images/costa-nova-palheiros.jpg" alt="Palheiros da Costa Nova Aveiro Çizgili Evleri" class="cult-img culture-img">
+        </div>
+      </div>
+    </div>
+
+    <!-- 3.8 Romantizmin Masalsı Sarayı (Palácio da Pena - Sintra) -->
+    <div class="cult-section-card filter-target" data-category="mimari">
+      <div class="cult-content-grid reverse">
+        <div>
+          <span class="cult-badge-tag">🏰 19. Yüzyıl Romantizm Zirvesi</span>
+          <h3 class="cult-card-title">Palácio Nacional da Pena (Sintra Masal Sarayı)</h3>
+          <p class="cult-card-desc">
+            Sintra dağlarının sisli zirvesinde kayalıklar üzerine inşa edilen <strong>Pena Ulusal Sarayı</strong>, Portekiz Romantizm akımının dünyadaki en eksantrik ve büyüleyici başyapıtıdır.
+          </p>
+          <p class="cult-card-desc">
+            Kral II. Ferdinand'ın hayal gücüyle şekillenen saray; Neo-Manuelin, Neo-Gotik, Neo-Mağribi ve Neo-Rönesans üsluplarını cesurca harmanlar. Canlı sarı, kırmızı ve mor kuleleri, mitolojik deniz canavarı Triton kabartması ve egzotik orman bahçesiyle UNESCO Dünya Mirası listesindedir.
+          </p>
+          <div class="cult-stats-row">
+            <div class="cult-stat-pill">
+              <div class="cult-stat-label">MİMARİ AKIM</div>
+              <div class="cult-stat-val">19. Yüzyıl Romantizm & Eklektizm</div>
+            </div>
+            <div class="cult-stat-pill" style="border-left-color: var(--pt-red);">
+              <div class="cult-stat-label">KURUCU</div>
+              <div class="cult-stat-val">Kral II. Ferdinand (Sanatçı Kral)</div>
+            </div>
+            <div class="cult-stat-pill" style="border-left-color: var(--pt-gold);">
+              <div class="cult-stat-label">UNESCO STATÜSÜ</div>
+              <div class="cult-stat-val">1995 (Sintra Kültürel Peyzajı)</div>
+            </div>
+          </div>
+        </div>
+        <div class="cult-img-wrap">
+          <img src="assets/images/pena-palace.jpg" alt="Palacio Nacional da Pena Sintra Sarayı" class="cult-img culture-img">
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================================================================
+         BÖLÜM 4: KÜLTÜREL SEMBOLLER VE SOMUT OLMAYAN MİRAS
+         =================================================================== -->
+    <div id="kulturel-semboller" class="section-header" style="margin-top: 5rem; margin-bottom: 2rem;">
+      <span class="section-subtitle">4. Tematik Alan</span>
+      <h2 class="section-title">Portekiz Kültürel Sembolleri & Ruhu</h2>
+      <p class="section-desc">
+        Hüznü ve hasreti anlatan Fado ezgilerinden, adaletin simgesi Barcelos Horozu'na ve saç teli inceliğinde örülen altın telkari sanatına.
+      </p>
+    </div>
+
+    <div class="symbols-grid">
+      <!-- Fado -->
+      <div class="symbol-card">
+        <div class="symbol-icon">🎸</div>
+        <h3 class="symbol-title">Fado & Saudade</h3>
+        <p class="symbol-desc">
+          UNESCO Somut Olmayan Kültürel Mirası olan Fado, Portekiz ruhunun sesidir. 12 telli Portekiz gitarı (Guitarra Portuguesa) eşliğinde siyah şallı sanatçıların söylediği şarkılar; ayrılık, okyanus hasreti, kader ve telafisi olmayan derin özlem anlamına gelen <strong>"Saudade"</strong> duygusunu dile getirir.
+        </p>
+      </div>
+
+      <!-- Barcelos Horozu -->
+      <div class="symbol-card">
+        <div class="symbol-icon">🐓</div>
+        <h3 class="symbol-title">Galo de Barcelos</h3>
+        <p class="symbol-desc">
+          Portekiz'in milli uğur simgesi olan siyah, kırmızı ve sarı benekli Barcelos Horozu; haksız yere suçlanan bir hacının fırındaki pişmiş horozun ayağa kalkıp öteceğini söyleyerek masumiyetini kanıtlaması efsanesine dayanır. Günümüzde adalet, inanç ve iyi şansın timsalidir.
+        </p>
+      </div>
+
+      <!-- Telkari Altın -->
+      <div class="symbol-card">
+        <div class="symbol-icon">💛</div>
+        <h3 class="symbol-title">Filigrana Portuguesa</h3>
+        <p class="symbol-desc">
+          Kuzey Portekiz'in (Gondomar ve Póvoa de Lanhoso) bin yıllık altın zanaatı. Som altın veya gümüş tellerin saç kılı inceliğinde bükülerek dantel gibi örülmesiyle üretilen Viana Kalpleri (Coração de Viana) ve taçlar, geleneksel Portekiz kadın şıklığının doruk noktasıdır.
+        </p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ===================================================================
+       ALT BİLGİ (FOOTER)
+       =================================================================== -->
+  <footer class="main-footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <img src="assets/images/flag-of-portugal.svg" alt="Portekiz Bayrağı" class="logo-flag-icon">
+        <span class="logo-text" style="font-size: 1.1rem;">PORTUGAL</span>
+      </div>
+      <p class="footer-text">
+        © 2026 Portekiz Tanıtım Portalı. 3. Hafta: Kültür Bölümü.
+      </p>
+      <ul class="footer-quick-links">
+        <li><a href="index.html">Ana Sayfa</a></li>
+        <li><a href="cografya.html">Coğrafya</a></li>
+        <li><a href="tarih.html">Tarih</a></li>
+        <li><a href="kultur.html">Kültür</a></li>
+        <li><a href="turizm.html">Turizm</a></li>
+        <li><a href="#geleneksel-kiyafetler">Kılık Kıyafet</a></li>
+        <li><a href="#bayramlar-festivaller">Festivaller</a></li>
+        <li><a href="#mimari-kultur">Mimari Miras</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- Temel JS -->
+  <script src="js/main.js"></script>
+
+  <!-- Kültür Sayfası Özel Etkileşim Scripti (Kategori Filtreleme) -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      initCultureCategoryFilter();
+    });
+
+    // -----------------------------------------------------------------
+    // 1. KATEGORİ FİLTRELEME
+    // -----------------------------------------------------------------
+    function initCultureCategoryFilter() {
+      const filterBtns = document.querySelectorAll('.filter-pill-btn');
+      const cards = document.querySelectorAll('.filter-target');
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const filter = btn.getAttribute('data-filter');
+          cards.forEach(card => {
+            const cat = card.getAttribute('data-category');
+            if (filter === 'all' || cat === filter) {
+              card.style.display = '';
+              card.style.animation = 'fadeIn 0.35s ease';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+    }
+  </script>
+</body>
+</html>

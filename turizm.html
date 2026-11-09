@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portekiz Turizm Rehberi | Gezilecek Yerler, Turizm Verileri, Vize & Konsolosluk Bilgileri (Hafta 4)</title>
+  
+  <!-- Favicon: Portekiz Bayrağı -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/flag-of-portugal.svg">
+  
+  <!-- CSS Dosyası -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    /* ===================================================================
+       TURİZM SAYFASI ÖZEL STİLLERİ
+       =================================================================== */
+    .tour-hero {
+      background: linear-gradient(135deg, rgba(4, 106, 56, 0.4) 0%, rgba(255, 196, 0, 0.22) 50%, rgba(218, 41, 28, 0.4) 100%),
+                  url('assets/images/porto-scenic.jpg') center/cover no-repeat;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 4.5rem 2rem;
+      text-align: center;
+      margin-bottom: 3.5rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.7), var(--shadow-glow);
+    }
+    .tour-hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(7, 14, 10, 0.72) 0%, rgba(7, 14, 10, 0.92) 100%);
+      pointer-events: none;
+    }
+    .tour-hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .tour-hero .week-badge {
+      display: inline-block;
+      background: rgba(255, 196, 0, 0.15);
+      border: 1px solid var(--pt-gold);
+      color: var(--pt-gold);
+      padding: 6px 18px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 1.2rem;
+      text-transform: uppercase;
+    }
+    .tour-hero-title {
+      font-family: 'Cinzel', serif;
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 1.2rem;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.8);
+    }
+    .tour-hero-desc {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+
+    /* İstatistik KPI Kartları */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3.5rem;
+    }
+    .kpi-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.8rem 1.4rem;
+      text-align: center;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .kpi-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--pt-gold);
+      box-shadow: 0 12px 30px rgba(255, 196, 0, 0.15);
+    }
+    .kpi-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--pt-green), var(--pt-gold), var(--pt-red));
+    }
+    .kpi-icon {
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+    }
+    .kpi-number {
+      font-family: 'Cinzel', serif;
+      font-size: 2.3rem;
+      font-weight: 900;
+      color: var(--pt-gold);
+      margin-bottom: 0.4rem;
+      letter-spacing: -0.5px;
+    }
+    .kpi-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 0.4rem;
+    }
+    .kpi-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* Pazar Payı & Ülkeler Bar Grafiği */
+    .chart-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2.2rem;
+      margin-bottom: 3.5rem;
+    }
+    .bar-row {
+      display: grid;
+      grid-template-columns: 140px 1fr 60px;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.1rem;
+    }
+    .bar-label {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .bar-track {
+      background: rgba(255, 255, 255, 0.08);
+      height: 18px;
+      border-radius: 9px;
+      overflow: hidden;
+      position: relative;
+    }
+    .bar-fill {
+      height: 100%;
+      border-radius: 9px;
+      background: linear-gradient(90deg, var(--pt-green), var(--pt-gold));
+      transition: width 1s ease-in-out;
+    }
+    .bar-value {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--pt-gold);
+      text-align: right;
+    }
+
+    /* Turistik Yerler Kartları */
+    .places-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3.5rem;
+    }
+    .place-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+    .place-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--border-glow);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.6), 0 0 20px rgba(255,196,0,0.2);
+    }
+    .place-img-wrap {
+      position: relative;
+      width: 100%;
+      height: 230px;
+      overflow: hidden;
+    }
+    .place-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .place-card:hover .place-img {
+      transform: scale(1.08);
+    }
+    .place-tag {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: rgba(7, 14, 10, 0.85);
+      border: 1px solid var(--pt-gold);
+      color: var(--pt-gold);
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 50px;
+      backdrop-filter: blur(4px);
+    }
+    .place-body {
+      padding: 1.6rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    .place-city {
+      font-size: 0.85rem;
+      color: var(--pt-gold);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.4rem;
+    }
+    .place-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.8rem;
+    }
+    .place-desc {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 1.2rem;
+      flex-grow: 1;
+    }
+    .place-highlights {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 1rem;
+    }
+    .place-highlights li {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .place-highlights li strong {
+      color: var(--text-main);
+    }
+
+    /* Mevsim & Ay Seçici İnteraktif Bileşen */
+    .month-selector-wrapper {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2.2rem;
+      margin-bottom: 3.5rem;
+    }
+    .months-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+    .month-btn {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,196,0,0.2);
+      color: var(--text-main);
+      padding: 8px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .month-btn:hover, .month-btn.active {
+      background: var(--pt-gold);
+      color: #000;
+      border-color: var(--pt-gold);
+      box-shadow: 0 4px 15px rgba(255,196,0,0.3);
+      font-weight: 700;
+    }
+    .month-display-card {
+      background: rgba(0,0,0,0.35);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-md);
+      padding: 1.8rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    @media (max-width: 768px) {
+      .month-display-card {
+        grid-template-columns: 1fr;
+      }
+    }
+    .month-header h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      color: var(--pt-gold);
+      margin-bottom: 0.5rem;
+    }
+    .month-stat-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-right: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .badge-temp { background: rgba(255, 196, 0, 0.2); color: var(--pt-gold); }
+    .badge-crowd { background: rgba(218, 41, 28, 0.2); color: #ff8a80; }
+    .badge-nature { background: rgba(4, 106, 56, 0.3); color: #a5d6a7; }
+
+    /* Konsolosluk & Giriş İki Sütunlu Grid */
+    .dual-guide-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 3.5rem;
+    }
+    @media (max-width: 900px) {
+      .dual-guide-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .guide-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2.2rem;
+      position: relative;
+    }
+    .guide-card-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .guide-card-icon {
+      font-size: 2.2rem;
+      width: 55px;
+      height: 55px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,196,0,0.12);
+      border: 1px solid var(--pt-gold);
+      border-radius: 12px;
+    }
+    .guide-card-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.4rem;
+      color: #fff;
+    }
+    .guide-info-row {
+      margin-bottom: 1.1rem;
+      display: flex;
+      gap: 0.8rem;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .guide-info-label {
+      font-weight: 700;
+      color: var(--pt-gold);
+      min-width: 100px;
+    }
+    .guide-info-val {
+      color: var(--text-main);
+    }
+    .badge-passport {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-right: 4px;
+    }
+    .pass-green { background: #046a38; color: #fff; }
+    .pass-red { background: #98170d; color: #fff; }
+
+  </style>
+</head>
+<body>
+
+  <!-- ÜST MENÜ (HEADER & NAVBAR) -->
+  <header class="main-header">
+    <div class="nav-container">
+      <a href="index.html" class="logo-area" title="Portekiz Ana Sayfa">
+        <img src="assets/images/flag-of-portugal.svg" alt="Portekiz Bayrağı" class="logo-flag-icon">
+        <span class="logo-text">PORTUGAL</span>
+      </a>
+
+      <!-- 10 Hafta Menüsü -->
+      <nav class="nav-menu-wrapper">
+        <ul class="nav-menu">
+          <li class="nav-item"><a href="index.html">Ana Sayfa</a></li>
+          <li class="nav-item"><a href="cografya.html">Coğrafya</a></li>
+          <li class="nav-item"><a href="tarih.html">Tarih</a></li>
+          <li class="nav-item"><a href="kultur.html">Kültür</a></li>
+          <li class="nav-item active"><a href="turizm.html">Turizm</a></li>
+          <li class="nav-item"><a href="hafta-5.html">Hafta 5</a></li>
+          <li class="nav-item"><a href="hafta-6.html">Hafta 6</a></li>
+          <li class="nav-item"><a href="hafta-7.html">Hafta 7</a></li>
+          <li class="nav-item"><a href="hafta-8.html">Hafta 8</a></li>
+          <li class="nav-item"><a href="hafta-9.html">Hafta 9</a></li>
+          <li class="nav-item"><a href="hafta-10.html">Hafta 10</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ANA İÇERİK ALANI -->
+  <main class="container" style="padding-top: 2rem;">
+
+    <!-- HERO BÖLÜMÜ -->
+    <section class="tour-hero">
+      <div class="tour-hero-content">
+        <span class="week-badge">🇵🇹 HAFTA 4 • DÜNYANIN LİDER DESTİNASYONU</span>
+        <h1 class="tour-hero-title">Portekiz Turizm Rehberi</h1>
+        <p class="tour-hero-desc">
+          Yılda 30 milyonu aşkın gezgini ağırlayan Portekiz; Atlantik'in masalsı sarayları, güneşle yıkanan altın sahilleri, tarihi tramvayları, zengin gastronomisi ve dünyaca ünlü misafirperverliğiyle Avrupa'nın parlayan yıldızıdır.
+        </p>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+          <a href="#turistik-yerler" class="btn btn-primary" style="background: var(--pt-gold); color: #000; font-weight: 700; padding: 12px 24px; border-radius: 8px; text-decoration: none;">📍 Gezilecek Yerler</a>
+          <a href="#giris-ve-konsolosluk" class="btn btn-secondary" style="background: rgba(255,255,255,0.1); border: 1px solid var(--border-color); color: #fff; padding: 12px 24px; border-radius: 8px; text-decoration: none;">🏛️ Konsolosluk & Vize</a>
+          <a href="#hangi-ay-gidilmeli" class="btn btn-secondary" style="background: rgba(255,255,255,0.1); border: 1px solid var(--border-color); color: #fff; padding: 12px 24px; border-radius: 8px; text-decoration: none;">☀️ Hangi Ay Gidilmeli?</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- BÖLÜM 1: VERİLERLE ÜLKEYE GELEN KİŞİ SAYISI VE TURİZM İSTATİSTİKLERİ -->
+    <section class="section-block" id="turizm-verileri">
+      <div class="section-title-wrap text-center" style="text-align: center; margin-bottom: 2.5rem;">
+        <span style="color: var(--pt-gold); font-weight: 700; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px;">İstatistikler ve Ekonomik Büyüklük</span>
+        <h2 style="font-family: 'Cinzel', serif; font-size: 2.2rem; color: #fff; margin-top: 0.4rem;">Verilerle Portekiz Turizmi</h2>
+        <p style="color: var(--text-muted); max-width: 700px; margin: 0.6rem auto 0;">
+          Portekiz Ulusal İstatistik Enstitüsü (INE) ve <em>Turismo de Portugal</em> resmi verilerine göre ülkenin turizm hacmi tarihi zirvesindedir.
+        </p>
+      </div>
+
+      <!-- KPI Sayaç Kartları -->
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-icon">✈️</div>
+          <div class="kpi-number">30.5M+</div>
+          <div class="kpi-title">Yıllık Turist Sayısı</div>
+          <div class="kpi-desc">10.4 milyonluk ülke nüfusunun neredeyse 3 katı uluslararası misafir ağırlanmaktadır.</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon">🏨</div>
+          <div class="kpi-number">77.2M</div>
+          <div class="kpi-title">Toplam Geceleme</div>
+          <div class="kpi-desc">Yabancı ziyaretçilerin otel ve konaklama tesislerindeki yıllık geceleme rekoru.</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon">💶</div>
+          <div class="kpi-number">25.1 Milyar €</div>
+          <div class="kpi-title">Yıllık Turizm Geliri</div>
+          <div class="kpi-desc">Ülke ekonomisine döviz kazandıran en büyük ve en hızlı büyüyen lokomotif sektör.</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon">📊</div>
+          <div class="kpi-number">%16.8</div>
+          <div class="kpi-title">GSYİH (GDP) Payı</div>
+          <div class="kpi-desc">Portekiz milli gelirinin yaklaşık beşte biri doğrudan ve dolaylı olarak turizmden sağlanır.</div>
+        </div>
+      </div>
+
+      <!-- En Çok Turist Gönderen Ülkeler -->
+      <div class="chart-container">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.5rem;">
+          <h3 style="font-family: 'Cinzel', serif; font-size: 1.4rem; color: #fff;">Portekiz'e En Çok Turist Gönderen Ülkeler (% Pazar Payı)</h3>
+          <span style="font-size: 0.85rem; color: var(--pt-gold); background: rgba(255,196,0,0.1); padding: 4px 10px; border-radius: 4px;">Kaynak: INE Portugal 2024</span>
+        </div>
+
+        <div class="bar-row">
+          <div class="bar-label">🇬🇧 Birleşik Krallık</div>
+          <div class="bar-track"><div class="bar-fill" style="width: 85%;"></div></div>
+          <div class="bar-value">%19.2</div>
+        </div>
+
+        <div class="bar-row">
+          <div class="bar-label">🇩🇪 Almanya</div>
+          <div class="bar-track"><div class="bar-fill" style="width: 58%;"></div></div>
+          <div class="bar-value">%12.4</div>
+        </div>
+
+        <div class="bar-row">
+          <div class="bar-label">🇪🇸 İspanya</div>
+          <div class="bar-track"><div class="bar-fill" style="width: 54%;"></div></div>
+          <div class="bar-value">%11.5</div>
+        </div>
+
+        <div class="bar-row">
+          <div class="bar-label">🇫🇷 Fransa</div>
+          <div class="bar-track"><div class="bar-fill" style="width: 48%;"></div></div>
+          <div class="bar-value">%10.1</div>
+        </div>
+
+        <div class="bar-row">
+          <div class="bar-label">🇺🇸 ABD</div>
+          <div class="bar-track"><div class="bar-fill" style="width: 42%;"></div></div>
+          <div class="bar-value">%8.9</div>
+        </div>
+
+        <div class="bar-row">
+          <div class="bar-label">🇹🇷 Türkiye & Diğer</div>
+          <div class="bar-track"><div class="bar-fill" style="width: 32%;"></div></div>
+          <div class="bar-value">~95.000+</div>
+        </div>
+        <p style="font-size: 0.85rem; color: var(--text-dim); margin-top: 1rem; line-height: 1.5;">
+          * Türk Hava Yolları'nın İstanbul-Lizbon ve İstanbul-Porto doğrudan uçuş seferlerinin artmasıyla birlikte Türkiye'den Portekiz'e giden turist sayısında her yıl %20'nin üzerinde düzenli bir artış yaşanmaktadır.
+        </p>
+      </div>
+    </section>
+
+    <!-- BÖLÜM 2: EN POPÜLER TURİSTİK YERLER VE RESİMLERİ -->
+    <section class="section-block" id="turistik-yerler">
+      <div class="section-title-wrap text-center" style="text-align: center; margin-bottom: 2.5rem;">
+        <span style="color: var(--pt-gold); font-weight: 700; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px;">Öne Çıkan Rotalar</span>
+        <h2 style="font-family: 'Cinzel', serif; font-size: 2.2rem; color: #fff; margin-top: 0.4rem;">Portekiz'in En Büyüleyici Turistik Noktaları</h2>
+        <p style="color: var(--text-muted); max-width: 700px; margin: 0.6rem auto 0;">
+          Tarihi gotik manastırlardan altın kumsallara, masal şatolarından okyanus krater göllerine kadar mutlaka görülmesi gereken yerler:
+        </p>
+      </div>
+
+      <div class="places-grid">
+
+        <!-- 1. Belém Kulesi & Lizbon -->
+        <div class="place-card">
+          <div class="place-img-wrap">
+            <img src="assets/images/belem-tower.jpg" alt="Belém Kulesi Lizbon" class="place-img">
+            <span class="place-tag">UNESCO Mirası</span>
+          </div>
+          <div class="place-body">
+            <div class="place-city">LİZBON (LISBOA)</div>
+            <h3 class="place-title">Belém Kulesi & Jerónimos</h3>
+            <p class="place-desc">
+              16. yüzyılda Tejo Nehri ağzına inşa edilen Belém Kulesi, Keşifler Çağı'nın sembolüdür. Vasco da Gama'nın denize açıldığı noktada yer alan Jerónimos Manastırı ile birlikte Manuelin mimarisinin zirvesidir.
+            </p>
+            <ul class="place-highlights">
+              <li>📍 <strong>Öne Çıkan:</strong> Tarihi 28 nolu Sarı Tramvay & Alfama</li>
+              <li>🥧 <strong>Tat:</strong> Orijinal fırından taze sıcak Pastéis de Belém</li>
+              <li>🎫 <strong>İpucu:</strong> Lisboa Card ile sıra beklemeden ücretsiz giriş</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 2. Pena Sarayı & Sintra -->
+        <div class="place-card">
+          <div class="place-img-wrap">
+            <img src="assets/images/pena-palace.jpg" alt="Pena Sarayı Sintra" class="place-img">
+            <span class="place-tag">Dünyanın En İkonik Sarayı</span>
+          </div>
+          <div class="place-body">
+            <div class="place-city">SİNTRA (SINTRA)</div>
+            <h3 class="place-title">Pena Sarayı & Cabo da Roca</h3>
+            <p class="place-desc">
+              Sintra dağlarının sisli zirvesinde sarı, kırmızı ve mor tonlarıyla yükselen Pena Sarayı, 19. yüzyıl Romantizm akımının yaşayan masalıdır. Yakınındaki Cabo da Roca ise Avrupa kıtasının en batı ucudur.
+            </p>
+            <ul class="place-highlights">
+              <li>🌊 <strong>Cabo da Roca:</strong> "Karaların bittiği, denizin başladığı yer"</li>
+              <li>🏰 <strong>Quinta da Regaleira:</strong> Gizemli Ters Başlatma Kuyusu</li>
+              <li>🚆 <strong>Ulaşım:</strong> Lizbon Rossio Garı'ndan 40 dakikalık tren</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 3. Porto & Dom Luís Köprüsü -->
+        <div class="place-card">
+          <div class="place-img-wrap">
+            <img src="assets/images/porto-scenic.jpg" alt="Porto Dom Luís Köprüsü ve Ribeira" class="place-img">
+            <span class="place-tag">Kuzeyin Başkenti</span>
+          </div>
+          <div class="place-body">
+            <div class="place-city">PORTO (OPO)</div>
+            <h3 class="place-title">Ribeira & Dom Luís I Köprüsü</h3>
+            <p class="place-desc">
+              Douro Nehri'nin iki yakasını bağlayan heybetli çift katlı çelik köprü, Gustave Eiffel'in öğrencisi Teófilo Seyrig tarafından tasarlanmıştır. Nehir kıyısındaki rengarenk Ribeira evleri ve şarap mahzenleri büyüleyicidir.
+            </p>
+            <ul class="place-highlights">
+              <li>📚 <strong>Livraria Lello:</strong> Harry Potter'a ilham veren masalsı kitapçı</li>
+              <li>🎨 <strong>São Bento Garı:</strong> 20.000 el yapımı Azulejo çinisi</li>
+              <li>🍷 <strong>Deneyim:</strong> Douro Nehri üzerinde tarihi Rabelo tekne turu</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 4. Benagil Mağarası & Algarve -->
+        <div class="place-card">
+          <div class="place-img-wrap">
+            <img src="assets/images/benagil-cave.jpg" alt="Benagil Deniz Mağarası Algarve" class="place-img">
+            <span class="place-tag">Dünyanın En Güzel Mağarası</span>
+          </div>
+          <div class="place-body">
+            <div class="place-city">ALGARVE SAHİLLERİ</div>
+            <h3 class="place-title">Benagil Mağarası & Altın Kıyılar</h3>
+            <p class="place-desc">
+              Tepesinde doğal bir kubbe penceresi olan Benagil Mağarası (Algar de Benagil), içeri süzülen güneş ışığı ve altın kumsalıyla dünyanın en çok fotoğraflanan doğal harikalarından biridir.
+            </p>
+            <ul class="place-highlights">
+              <li>🛶 <strong>Erişim:</strong> Tekne, kano (kayak) veya denizden yüzerek</li>
+              <li>🏖️ <strong>Praia da Marinha:</strong> Dünyanın en iyi 10 plajı listesinde</li>
+              <li>🏄 <strong>Aktivite:</strong> Ponta da Piedade falezleri ve okyanus sörfü</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 5. Madeira Adası -->
+        <div class="place-card">
+          <div class="place-img-wrap">
+            <img src="assets/images/santana-casas.jpg" alt="Madeira Santana Üçgen Evleri" class="place-img">
+            <span class="place-tag">Sonsuz Bahar Adası</span>
+          </div>
+          <div class="place-body">
+            <div class="place-city">MADEIRA ÖZERK BÖLGESİ</div>
+            <h3 class="place-title">Funchal & Santana Evleri</h3>
+            <p class="place-desc">
+              Atlantik Okyanusu'nda yer alan Madeira, tropikal doğası, egzotik botanik bahçeleri, volkanik falezleri ve Santana kasabasındaki geleneksel saz çatılı üçgen evleriyle (Palheiros) dört mevsim baharı yaşatır.
+            </p>
+            <ul class="place-highlights">
+              <li>🚶 <strong>Levada Yürüyüşleri:</strong> 2.000 km'lik su kanalı patikaları</li>
+              <li>🛷 <strong>Monte Toboggan:</strong> Hasır kızaklarla asfalt üzerinde iniş</li>
+              <li>✈️ <strong>Funchal:</strong> Dünyanın en heyecan verici havaalanı pisti</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 6. Azor Adaları (Açores) -->
+        <div class="place-card">
+          <div class="place-img-wrap">
+            <img src="assets/images/sete-cidades.jpg" alt="Azor Adaları Sete Cidades İkiz Göller" class="place-img">
+            <span class="place-tag">Atlantik'in Kalbi</span>
+          </div>
+          <div class="place-body">
+            <div class="place-city">AZOR ADALARI (AÇORES)</div>
+            <h3 class="place-title">Sete Cidades & Krater Gölleri</h3>
+            <p class="place-desc">
+              9 volkanik adadan oluşan Azorlar, devasa krater gölleri, fışkıran jeotermal kaplıcaları ve el değmemiş yeşil vadileriyle doğaseverlerin mabedidir. Biri zümrüt yeşili diğeri safir mavisi olan Sete Cidades efsanevidir.
+            </p>
+            <ul class="place-highlights">
+              <li>🌋 <strong>Pico Dağı:</strong> Portekiz'in en yüksek zirvesi (2.351 m)</li>
+              <li>🐳 <strong>Balina Gözlemi:</strong> Dünyanın 1 numaralı balina izleme rotası</li>
+              <li>🍲 <strong>Cozido das Furnas:</strong> Volkan buharında 6 saat pişen güveç</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- BÖLÜM 3: HANGİ AY GİDİLMELİ? (MEVSİM REHBERİ) -->
+    <section class="section-block" id="hangi-ay-gidilmeli">
+      <div class="section-title-wrap text-center" style="text-align: center; margin-bottom: 2.5rem;">
+        <span style="color: var(--pt-gold); font-weight: 700; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px;">Zamanlama ve İklim Rehberi</span>
+        <h2 style="font-family: 'Cinzel', serif; font-size: 2.2rem; color: #fff; margin-top: 0.4rem;">Portekiz'e Hangi Ay Gidilmeli?</h2>
+        <p style="color: var(--text-muted); max-width: 700px; margin: 0.6rem auto 0;">
+          Portekiz yılda 300'den fazla güneşli günüyle Avrupa'nın en ılıman ülkesidir. Seyahat amacınıza en uygun dönemi seçin:
+        </p>
+      </div>
+
+      <!-- İnteraktif Ay Seçici Kartı -->
+      <div class="month-selector-wrapper">
+        <div class="months-nav" id="months-nav">
+          <button class="month-btn" data-month="0">Ocak</button>
+          <button class="month-btn" data-month="1">Şubat</button>
+          <button class="month-btn" data-month="2">Mart</button>
+          <button class="month-btn" data-month="3">Nisan</button>
+          <button class="month-btn active" data-month="4">Mayıs</button>
+          <button class="month-btn" data-month="5">Haziran</button>
+          <button class="month-btn" data-month="6">Temmuz</button>
+          <button class="month-btn" data-month="7">Ağustos</button>
+          <button class="month-btn" data-month="8">Eylül</button>
+          <button class="month-btn" data-month="9">Ekim</button>
+          <button class="month-btn" data-month="10">Kasım</button>
+          <button class="month-btn" data-month="11">Aralık</button>
+        </div>
+
+        <div class="month-display-card" id="month-display">
+          <div>
+            <div class="month-header">
+              <span style="color: var(--pt-gold); font-weight: 700; font-size: 0.85rem; text-transform: uppercase;">İdeal Ziyaret Dönemi</span>
+              <h3 id="display-month-name">Mayıs (Primavera - İlkbahar)</h3>
+            </div>
+            <div style="margin-bottom: 1rem;">
+              <span class="month-stat-badge badge-temp" id="display-temp">🌡️ 21°C - 23°C (Ilık & Güneşli)</span>
+              <span class="month-stat-badge badge-crowd" id="display-crowd">👥 Orta Yoğunluk (Konforlu)</span>
+              <span class="month-stat-badge badge-nature" id="display-rating">⭐ Puan: 10/10 (En İyi Dönem)</span>
+            </div>
+            <p id="display-desc" style="color: var(--text-muted); line-height: 1.6; font-size: 0.95rem;">
+              Mayıs ayı Portekiz'i gezmek için yılın tartışmasız en güzel ayıdır. Ne yazın bunaltıcı sıcakları ne de kış yağmurları vardır. Sintra saray bahçeleri rengarenk çiçeklerle doludur, Lizbon ve Porto sokakları yürüyerek keşfetmek için harikadır.
+            </p>
+          </div>
+          <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); padding: 1.4rem; border-radius: var(--radius-sm);">
+            <h4 style="color: #fff; margin-bottom: 0.8rem; font-size: 1rem;">🎯 Bu Ay İçin En İyi Plan:</h4>
+            <ul style="list-style: none; padding: 0; margin: 0; color: var(--text-muted); font-size: 0.9rem; line-height: 1.7;" id="display-tips">
+              <li>✨ Lizbon - Sintra - Cascais üçgeninde kültürel yürüyüşler</li>
+              <li>🍷 Douro Vadisi'nde açık hava şarap bağları turları</li>
+              <li>📸 Alfama seyir teraslarında (Miradouros) gün batımı</li>
+              <li>💰 Yaz yoğunluğu başlamadan önce uygun otel ve uçak fiyatları</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 4 Mevsim Özet Tablosu -->
+        <div style="margin-top: 2rem; overflow-x: auto;">
+          <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem;">
+            <thead>
+              <tr style="border-bottom: 2px solid var(--pt-gold); color: var(--pt-gold);">
+                <th style="padding: 12px 10px;">Mevsim</th>
+                <th style="padding: 12px 10px;">Aylar</th>
+                <th style="padding: 12px 10px;">Ortalama Sıcaklık</th>
+                <th style="padding: 12px 10px;">Öne Çıkan Özellik</th>
+                <th style="padding: 12px 10px;">Kime Tavsiye Edilir?</th>
+              </tr>
+            </thead>
+            <tbody style="color: var(--text-main);">
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                <td style="padding: 12px 10px; font-weight: 700; color: #a5d6a7;">🌸 İlkbahar (Altın Dönem)</td>
+                <td style="padding: 12px 10px;">Nisan - Mayıs</td>
+                <td style="padding: 12px 10px;">19°C - 24°C</td>
+                <td style="padding: 12px 10px;">Çiçeklenen doğa, ideal yürüyüş havası</td>
+                <td style="padding: 12px 10px;">Kültür, mimari, fotoğrafçılık ve çiftler</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                <td style="padding: 12px 10px; font-weight: 700; color: #ffb74d;">☀️ Yaz (Yüksek Sezon)</td>
+                <td style="padding: 12px 10px;">Haziran - Ağustos</td>
+                <td style="padding: 12px 10px;">27°C - 34°C</td>
+                <td style="padding: 12px 10px;">Algarve plajları, sokak festivalleri (Santo António, São João)</td>
+                <td style="padding: 12px 10px;">Deniz, güneş, plaj partileri ve gece hayatı</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                <td style="padding: 12px 10px; font-weight: 700; color: #ffe082;">🍂 Sonbahar (Bağ Bozumu)</td>
+                <td style="padding: 12px 10px;">Eylül - Ekim</td>
+                <td style="padding: 12px 10px;">22°C - 26°C</td>
+                <td style="padding: 12px 10px;">Douro bağ bozumu, sıcak deniz suyu, sakinleşen şehirler</td>
+                <td style="padding: 12px 10px;">Gurme lezzet avcıları, şarap tutkunları, balayı</td>
+              </tr>
+              <tr>
+                <td style="padding: 12px 10px; font-weight: 700; color: #90caf9;">❄️ Kış (Düşük Bütçe & Sörf)</td>
+                <td style="padding: 12px 10px;">Kasım - Mart</td>
+                <td style="padding: 12px 10px;">14°C - 17°C</td>
+                <td style="padding: 12px 10px;">Nazaré'de 30 metrelik dev dalgalar, sırasız müzeler</td>
+                <td style="padding: 12px 10px;">Ekonomik seyahat edenler, sörfçüler, kış kaçamağı</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- BÖLÜM 4 & 5: KONSOLOSLUK VE ÜLKEYE GİRİŞ REHBERİ -->
+    <section class="section-block" id="giris-ve-konsolosluk">
+      <div class="section-title-wrap text-center" style="text-align: center; margin-bottom: 2.5rem;">
+        <span style="color: var(--pt-gold); font-weight: 700; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px;">Resmi ve Pratik Seyahat Bilgileri</span>
+        <h2 style="font-family: 'Cinzel', serif; font-size: 2.2rem; color: #fff; margin-top: 0.4rem;">Giriş Koşulları & Türk Konsolosluğu</h2>
+        <p style="color: var(--text-muted); max-width: 700px; margin: 0.6rem auto 0;">
+          Portekiz'e seyahat etmeyi planlayan Türk vatandaşları için vize prosedürleri, doğrudan uçuşlar ve diplomatik temsilcilik bilgileri:
+        </p>
+      </div>
+
+      <div class="dual-guide-grid">
+
+        <!-- KART 1: ÜLKEYE GİRİŞ VE VİZE NASIL? -->
+        <div class="guide-card">
+          <div class="guide-card-header">
+            <div class="guide-card-icon">🛂</div>
+            <div>
+              <h3 class="guide-card-title">Portekiz'e Giriş Nasıl?</h3>
+              <span style="font-size: 0.85rem; color: var(--text-muted);">Schengen Vizesi, Pasaport & Ulaşım</span>
+            </div>
+          </div>
+
+          <div class="guide-info-row">
+            <div class="guide-info-label">Vize Durumu:</div>
+            <div class="guide-info-val">
+              <div><span class="badge-passport pass-red">Bordo Pasaport:</span> <strong>Schengen Vizesine tabidir.</strong> Portekiz veya geçerli çok girişli başka bir Schengen vizesi gerekir.</div>
+              <div style="margin-top: 4px;"><span class="badge-passport pass-green">Yeşil Pasaport:</span> <strong>VİZESİZDİR!</strong> 180 günde 90 güne kadar vizeden muaftır.</div>
+              <div style="margin-top: 4px;"><span class="badge-passport pass-green">Gri & Siyah:</span> 90 güne kadar <strong>Vizesizdir</strong>.</div>
+            </div>
+          </div>
+
+          <div class="guide-info-row">
+            <div class="guide-info-label">Pasaport Şartı:</div>
+            <div class="guide-info-val">
+              Seyahat bitişinden itibaren en az <strong>3 ay</strong> (tercihen 6 ay) geçerli olmalı ve son 10 yılda alınmış olmalıdır.
+            </div>
+          </div>
+
+          <div class="guide-info-row">
+            <div class="guide-info-label">Direkt Uçuş:</div>
+            <div class="guide-info-val">
+              <strong>Türk Hava Yolları (THY):</strong><br>
+              ✈️ İstanbul (IST) ⇄ Lizbon (LIS) — Günde 2-3 sefer (~4s 45dk)<br>
+              ✈️ İstanbul (IST) ⇄ Porto (OPO) — Her gün direkt sefer (~4s 50dk)
+            </div>
+          </div>
+
+          <div class="guide-info-row">
+            <div class="guide-info-label">Sınır Kontrolü:</div>
+            <div class="guide-info-val">
+              Havalimanında dönüş bileti, otel rezervasyonu ve min. 30.000 € teminatlı Schengen Seyahat Sağlık Sigortası sorulabilir.
+            </div>
+          </div>
+
+          <div class="guide-info-row">
+            <div class="guide-info-label">Havalimanı Metro:</div>
+            <div class="guide-info-val">
+              Lizbon Havalimanı merkeze sadece 7 km'dir. Kırmızı Metro Hattı ile 20 dakikada şehir merkezine (1.80 €) ulaşılır.
+            </div>
+          </div>
+        </div>
+
+        <!-- KART 2: BİZİM KONSOLOSLUĞUMUZ VAR MI? -->
+        <div class="guide-card" style="border-color: rgba(4,106,56,0.5);">
+          <div class="guide-card-header">
+            <div class="guide-card-icon" style="background: rgba(4,106,56,0.2); border-color: var(--pt-green-light);">🇹🇷</div>
+            <div>
+              <h3 class="guide-card-title">Portekiz'de Konsolosluğumuz Var mı?</h3>
+              <span style="font-size: 0.85rem; color: #a5d6a7;">EVET! T.C. Lizbon Büyükelçiliği</span>
+            </div>
+          </div>
+
+          <div style="background: rgba(4,106,56,0.15); border: 1px solid rgba(4,106,56,0.4); padding: 12px; border-radius: 8px; margin-bottom: 1.2rem; font-size: 0.9rem; color: #c8e6c9;">
+            ✅ <strong>Resmi Temsilcilik:</strong> Lizbon'da Türkiye Cumhuriyeti Büyükelçiliği ve bünyesinde tüm vatandaşlık/pasaport işlemlerini yürüten Konsolosluk Şubesi bulunmaktadır.
+          </div>
+
+          <div class="guide-info-row">
+            <div class="guide-info-label">Adres:</div>
+            <div class="guide-info-val">
+              Avenida das Descobertas, No: 22, 1400-092 Restelo / Lizbon, Portekiz<br>
+              <small style="color: var(--text-dim);">(Belém semtinin hemen üstündeki elçilikler bölgesi)</small>
+            </div>
+          </div>
+
+          <div class="guide-info-row">
+            <div class="guide-info-label">Santral Tel:</div>
+            <div class="guide-info-val">
+              <a href="tel:+351213006000" style="color: var(--pt-gold); text-decoration: none; font-weight: 700;">+351 21 300 60 00</a>
+            </div>
+          </div>
+
+          <div class="guide-info-row">
+            <div class="guide-info-label">7/24 Acil Çağrı:</div>
+            <div class="guide-info-val">
+              <a href="tel:+903122922929" style="color: #ff8a80; text-decoration: none; font-weight: 700;">+90 312 292 29 29</a> (Dışişleri Çağrı Merkezi)<br>
+              <small style="color: var(--text-dim);">Nöbetçi Tel (Mesai Dışı Acil): +351 96 523 00 22</small>
+            </div>
+          </div>
+
+          <div class="guide-info-row">
+            <div class="guide-info-label">E-Posta:</div>
+            <div class="guide-info-val">
+              <code>embassy.lisbon@mfa.gov.tr</code>
+            </div>
+          </div>
+
+          <div class="guide-info-row">
+            <div class="guide-info-label">Hizmetler:</div>
+            <div class="guide-info-val">
+              Pasaport kaybında Geçici Pasaport (Seyahat Belgesi) düzenleme, noterlik, vekaletname, adli sicil, evlilik ve acil vatandaş desteği.
+            </div>
+          </div>
+
+          <div style="margin-top: 1rem; padding-top: 0.8rem; border-top: 1px solid rgba(255,255,255,0.08); font-size: 0.85rem; color: var(--text-dim);">
+            * Ayrıca kuzey bölgesinde acil durum irtibatı için <strong>Porto'da T.C. Fahri Konsolosluğu</strong> mevcuttur.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ALT BİLGİ (FOOTER) -->
+  <footer class="main-footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <img src="assets/images/flag-of-portugal.svg" alt="Portekiz Bayrağı" class="logo-flag-icon">
+        <span class="logo-text" style="font-size: 1.1rem;">PORTUGAL</span>
+      </div>
+      <p class="footer-text">
+        © 2026 Portekiz Tanıtım Portalı. Hafta 4: Turizm Rehberi.
+      </p>
+      <ul class="footer-quick-links">
+        <li><a href="index.html">Ana Sayfa</a></li>
+        <li><a href="cografya.html">Coğrafya</a></li>
+        <li><a href="tarih.html">Tarih</a></li>
+        <li><a href="kultur.html">Kültür</a></li>
+        <li><a href="turizm.html">Turizm</a></li>
+        <li><a href="hafta-10.html">Hafta 10</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- İNTERAKTİF SCRİPT -->
+  <script>
+    // 12 Ayın Verileri
+    const monthsData = [
+      {
+        name: "Ocak (Inverno - Kış)",
+        temp: "🌡️ 14°C - 16°C (Ilıman Kış)",
+        crowd: "👥 Çok Düşük (Sakin)",
+        rating: "⭐ Puan: 7/10 (Düşük Bütçe)",
+        desc: "Orta ve Kuzey Avrupa donarken Lizbon ve Algarve'de ılık bir kış yaşanır. Yağışlı günler olabilir ancak müzelerde sıra beklemezsiniz ve otel fiyatları yılın en ucuz seviyesindedir. Nazaré'de 25 metrelik dev kış dalgalarını izlemek için mükemmeldir.",
+        tips: ["Nazaré deniz fenerinden dev dalga sörfçülerini izleyin", "Lizbon müzeleri ve Jerónimos Manastırı'nı kalabalıksız gezin", "Fado evlerinde sıcak kırmızı şarap ve kestane keyfi yapın"]
+      },
+      {
+        name: "Şubat (Karnaval Ayı)",
+        temp: "🌡️ 15°C - 17°C (Hafif Ilık)",
+        crowd: "👥 Düşük - Orta (Karnavalda Hareketli)",
+        rating: "⭐ Puan: 7.5/10",
+        desc: "Şubat ayı Portekiz'de Loulé, Madeira ve Torres Vedras karnavallarıyla renklenir. Güneşli günler artmaya başlar, badem ağaçları Algarve'de erken çiçek açar.",
+        tips: ["Torres Vedras veya Loulé karnaval geçitlerine katılın", "Algarve'de çiçek açan beyaz badem vadilerini fotoğraflayın", "Sintra saraylarında romantik yürüyüşler yapın"]
+      },
+      {
+        name: "Mart (İlkbahar Uyanışı)",
+        temp: "🌡️ 17°C - 19°C (Bahar Başlangıcı)",
+        crowd: "👥 Orta",
+        rating: "⭐ Puan: 8/10",
+        desc: "İlkbaharın ilk müjdecisi olan Mart ayında parklar canlanır, hava ılıklaşır. Açık hava kafelerinde oturup kahve içmek ve Douro Nehri boyunca yürümek çok keyiflidir.",
+        tips: ["Porto Ribeira kıyısında güneşin tadını çıkarın", "Braga ve Guimarães gibi kuzeyin tarihi köklerini ziyaret edin", "Azor Adaları'nda doğa canlanırken termal havuzlara girin"]
+      },
+      {
+        name: "Nisan (Paskalya & Çiçekler)",
+        temp: "🌡️ 19°C - 21°C (Mükemmel)",
+        crowd: "👥 Orta (Paskalya Haftası Yoğun)",
+        rating: "⭐ Puan: 9/10 (Şahane)",
+        desc: "Nisan ayında Portekiz'de Paskalya (Semana Santa) kutlamaları özellikle Braga ve Óbidos'ta muazzam bir atmosfer yaratır. Hava 20 derece civarında ne üşütür ne terletir.",
+        tips: ["Braga Semana Santa meşaleli gece geçitlerini izleyin", "Ortaçağ kasabası Óbidos'un surlarında yürüyün", "Sintra'nın sisli masalsı bahçelerini keşfedin"]
+      },
+      {
+        name: "Mayıs (Primavera - Yılın Zirvesi)",
+        temp: "🌡️ 21°C - 24°C (Ilık & Parlak)",
+        crowd: "👥 Orta Yoğunluk (Konforlu)",
+        rating: "⭐ Puan: 10/10 (En İyi Dönem)",
+        desc: "Mayıs ayı Portekiz'i gezmek için yılın tartışmasız en güzel ayıdır. Ne yazın bunaltıcı sıcakları ne de kış yağmurları vardır. Sintra saray bahçeleri rengarenk çiçeklerle doludur, Lizbon ve Porto sokakları yürüyerek keşfetmek için harikadır.",
+        tips: ["Lizbon - Sintra - Cascais üçgeninde kültürel yürüyüşler", "Douro Vadisi'nde açık hava şarap bağları turları", "Alfama seyir teraslarında (Miradouros) gün batımı", "Yaz yoğunluğu başlamadan uygun fiyatlı seyahat"]
+      },
+      {
+        name: "Haziran (Festivaller & Karnavallar)",
+        temp: "🌡️ 25°C - 28°C (Yaz Başlangıcı)",
+        crowd: "👥 Yüksek (Çok Neşeli)",
+        rating: "⭐ Puan: 9.5/10",
+        desc: "Haziran ayı Portekiz'in en eğlenceli ayıdır! 12-13 Haziran'da Lizbon'da Santo António sokak festivalinde herkes sokakta ızgara sardalya yer ve dans eder. 23-24 Haziran'da Porto'da São João festivalinde plastik çekiçlerle kutlama yapılır.",
+        tips: ["Lizbon sokaklarında Festas de Lisboa karnavalına katılın", "Porto São João gecesinde Douro üzerindeki havai fişekleri izleyin", "Algarve sahillerinde ilk deniz sezonunu açın"]
+      },
+      {
+        name: "Temmuz (Plaj & Güneş)",
+        temp: "🌡️ 28°C - 32°C (Sıcak)",
+        crowd: "👥 Çok Yüksek (Zirve Sezon)",
+        rating: "⭐ Puan: 8.5/10",
+        desc: "Temmuz tam bir yaz tatili ayıdır. Algarve sahilleri, Lagos, Albufeira ve Benagil mağarası teknelerle dolar. Akşamları serin Atlantik esintisiyle çok keyifli geçer.",
+        tips: ["Benagil Mağarası ve Marinha plajında kano yapın", "Cascais ve Estoril plajlarında güneşlenin", "Gece açık hava fado konserlerini dinleyin"]
+      },
+      {
+        name: "Ağustos (Yazın Zirvesi)",
+        temp: "🌡️ 29°C - 35°C (En Sıcak Ay)",
+        crowd: "👥 Maksimum (Avrupa Tatilde)",
+        rating: "⭐ Puan: 8/10",
+        desc: "Tüm Avrupa'nın tatilde olduğu aydır. Sahiller oldukça kalabalıktır. Şehir merkezlerinde öğle saatlerinde sıcaklık 35 dereceyi bulabilir. Erken rezervasyon şarttır.",
+        tips: ["Deniz tatili için Algarve ve Madeira'yı tercih edin", "Öğle saatlerini klimalı müzelerde ve saray içlerinde geçirin", "Akşam serinliğinde açık hava teras restoranlarında deniz ürünleri tadın"]
+      },
+      {
+        name: "Eylül (Bağ Bozumu & Ilık Deniz)",
+        temp: "🌡️ 25°C - 28°C (Harika)",
+        crowd: "👥 Orta - Yüksek",
+        rating: "⭐ Puan: 9.8/10 (İkinci Altın Dönem)",
+        desc: "Eylül ayı Portekiz'in gizli mücevheridir. Okullar açıldığı için çocuklu aile kalabalığı azalır, deniz suyu yaz boyu ısındığı için en keyifli sıcaklıktadır. Douro Vadisi'nde bağ bozumu başlar.",
+        tips: ["Douro Vadisi'nde üzüm hasadı ve geleneksel ezme şenliklerine katılın", "Algarve'de kalabalıksız sıcak denizin tadını çıkarın", "Lizbon ve Porto'da sanat bienallerini ve caz festivallerini gezin"]
+      },
+      {
+        name: "Ekim (Sonbahar Romantizmi)",
+        temp: "🌡️ 21°C - 24°C (Ilık Sonbahar)",
+        crowd: "👥 Orta (Keyifli)",
+        rating: "⭐ Puan: 9/10",
+        desc: "Hala 22-24 derece ılık hava devam eder. Ağaçlar sararır, Sintra dağları altın renklere bürünür. Şehir turları, gurme gastronomi gezileri ve müzeler için harika bir andır.",
+        tips: ["Sintra'nın sararmış yapraklarla kaplı ormanlarında yürüyün", "Alentejo kırsalında zeytin hasadı ve şarap tadımı yapın", "Madeira'da ılıman iklimde levada yürüyüşleri yapın"]
+      },
+      {
+        name: "Kasım (Kestane & Sakinlik)",
+        temp: "🌡️ 16°C - 18°C (Serin)",
+        crowd: "👥 Düşük (Çok Rahat)",
+        rating: "⭐ Puan: 7.5/10",
+        desc: "11 Kasım São Martinho (Aziz Martin) bayramında sokaklarda közde kestane kokuları yükselir ('Água-pé ve kestane'). Turist kalabalığı tamamen çekilir, yerel halkla baş başa kalırsınız.",
+        tips: ["Sokak satıcılarından sıcak kağıt külahlarda közde kestane alın", "Nazaré'ye gidip dev dalgaları izleyin", "Porto'nun tarihi kütüphanelerinde ve kafelerinde vakit geçirin"]
+      },
+      {
+        name: "Aralık (Yılbaşı Işıkları & Çarşılar)",
+        temp: "🌡️ 14°C - 16°C (Ilıman)",
+        crowd: "👥 Orta (Yılbaşında Hareketli)",
+        rating: "⭐ Puan: 8/10",
+        desc: "Aralık ayında Lizbon ve Porto sokakları milyonlarca Noel ışığıyla donatılır. Avrupa'nın en ılıman kışlarından biri yaşandığı için dışarıda montla rahatça dolaşılabilir. Madeira'nın yılbaşı havai fişek gösterisi dünya rekoruna sahiptir.",
+        tips: ["Lizbon Praça do Comércio'daki dev ışıklı Noel ağacını görün", "Geleneksel 'Bolo Rei' (Kral Keki) tatlısını tadın", "Madeira Funchal'da Guiness rekorlu yılbaşı havai fişeklerini izleyin"]
+      }
+    ];
+
+    // Ay Butonları Dinleyicisi
+    const monthBtns = document.querySelectorAll('.month-btn');
+    monthBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        monthBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const idx = parseInt(btn.dataset.month);
+        const data = monthsData[idx];
+
+        document.getElementById('display-month-name').textContent = data.name;
+        document.getElementById('display-temp').textContent = data.temp;
+        document.getElementById('display-crowd').textContent = data.crowd;
+        document.getElementById('display-rating').textContent = data.rating;
+        document.getElementById('display-desc').textContent = data.desc;
+
+        const tipsUl = document.getElementById('display-tips');
+        tipsUl.innerHTML = '';
+        data.tips.forEach(t => {
+          const li = document.createElement('li');
+          li.textContent = t;
+          tipsUl.appendChild(li);
+        });
+      });
+    });
+
+  </script>
+</body>
+</html>

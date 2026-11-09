@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portekiz Tarihi | Önemli Savaşlar, Zaferler ve Kronolojik Tarihçe</title>
+  
+  <!-- Favicon: Portekiz Bayrağı -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/flag-of-portugal.svg">
+  
+  <!-- CSS Dosyası -->
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .hist-hero {
+      background: linear-gradient(135deg, rgba(218, 41, 28, 0.3) 0%, rgba(255, 196, 0, 0.2) 50%, rgba(4, 106, 56, 0.3) 100%);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 3.5rem 2rem;
+      text-align: center;
+      margin-bottom: 3.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hist-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-bottom: 3rem;
+      transition: var(--transition);
+    }
+    .hist-card:hover {
+      border-color: var(--border-glow);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+    }
+    .hist-content-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 2.5rem;
+      padding: 2.5rem;
+    }
+    .hist-content-grid.reverse .hist-img-wrap {
+      order: -1;
+    }
+    .hist-img-wrap {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+      border: 1px solid var(--border-color);
+      height: 330px;
+    }
+    .hist-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+      cursor: zoom-in;
+    }
+    .hist-card:hover .hist-img {
+      transform: scale(1.05);
+    }
+    .hist-badge {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--pt-gold);
+      background: rgba(255,196,0,0.15);
+      padding: 0.3rem 0.8rem;
+      border-radius: 50px;
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .hist-card-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.85rem;
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+    .hist-card-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 1.25rem;
+    }
+    .hist-stats-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .hist-stat-pill {
+      background: rgba(0,0,0,0.5);
+      border-left: 3px solid var(--pt-gold);
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      flex: 1;
+      min-width: 140px;
+    }
+    .hist-stat-label {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .hist-stat-val {
+      font-size: 0.95rem;
+      color: #fff;
+      font-weight: 700;
+      margin-top: 2px;
+    }
+
+    /* Gelişmiş Kronolojik Çizelge */
+    .timeline-container {
+      position: relative;
+      padding: 2rem 0;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .timeline-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 30px;
+      width: 3px;
+      background: linear-gradient(180deg, var(--pt-green) 0%, var(--pt-gold) 50%, var(--pt-red) 100%);
+      border-radius: 3px;
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2.5rem;
+      padding-left: 70px;
+    }
+    .timeline-marker {
+      position: absolute;
+      left: 17px;
+      top: 4px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--bg-dark);
+      border: 3px solid var(--pt-gold);
+      box-shadow: 0 0 15px var(--pt-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+    }
+    .timeline-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      transition: var(--transition);
+    }
+    .timeline-box:hover {
+      border-color: var(--border-glow);
+      transform: translateX(6px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    }
+    .timeline-epoch-badge {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--pt-gold);
+      background: rgba(255, 196, 0, 0.15);
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      margin-bottom: 0.5rem;
+      letter-spacing: 1px;
+    }
+
+    @media (max-width: 900px) {
+      .hist-content-grid {
+        grid-template-columns: 1fr;
+        padding: 1.5rem;
+      }
+      .hist-content-grid.reverse .hist-img-wrap {
+        order: 0;
+      }
+      .hist-img-wrap {
+        height: 240px;
+      }
+      .hist-hero {
+        padding: 2.5rem 1.25rem;
+      }
+      .hist-hero .hero-title {
+        font-size: 2.1rem !important;
+      }
+      .timeline-container::before {
+        left: 15px;
+      }
+      .timeline-item {
+        padding-left: 45px;
+      }
+      .timeline-marker {
+        left: 2px;
+        width: 26px;
+        height: 26px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===================================================================
+       ÜST MENÜ (HEADER & NAVBAR)
+       Hafta 2 yerine "Tarih" aktif
+       =================================================================== -->
+  <header class="main-header">
+    <div class="nav-container">
+      <a href="index.html" class="logo-area" title="Portekiz Ana Sayfa">
+        <img src="assets/images/flag-of-portugal.svg" alt="Portekiz Bayrağı" class="logo-flag-icon">
+        <span class="logo-text">PORTUGAL</span>
+      </a>
+
+      <!-- Menü Listesi: Hafta 1 yerine Coğrafya, Hafta 2 yerine Tarih -->
+      <nav class="nav-menu-wrapper">
+        <ul class="nav-menu">
+          <li class="nav-item"><a href="index.html">Ana Sayfa</a></li>
+          <li class="nav-item"><a href="cografya.html">Coğrafya</a></li>
+          <li class="nav-item active"><a href="tarih.html">Tarih</a></li>
+          <li class="nav-item"><a href="kultur.html">Kültür</a></li>
+          <li class="nav-item"><a href="turizm.html">Turizm</a></li>
+          <li class="nav-item"><a href="hafta-5.html">Hafta 5</a></li>
+          <li class="nav-item"><a href="hafta-6.html">Hafta 6</a></li>
+          <li class="nav-item"><a href="hafta-7.html">Hafta 7</a></li>
+          <li class="nav-item"><a href="hafta-8.html">Hafta 8</a></li>
+          <li class="nav-item"><a href="hafta-9.html">Hafta 9</a></li>
+          <li class="nav-item"><a href="hafta-10.html">Hafta 10</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===================================================================
+       TARİH HERO BÖLÜMÜ
+       =================================================================== -->
+  <main class="section">
+    <div class="hist-hero">
+      <span class="hist-badge">📜 2. Hafta Özel Bölümü</span>
+      <h1 class="hero-title" style="font-size: 2.8rem; margin-bottom: 1rem;">
+        Portekiz'in <span class="green">Köklü</span> ve <span class="gold">Şanlı</span> <span class="red">Tarihi</span>
+      </h1>
+      <p class="hero-desc" style="max-width: 800px; margin: 0 auto 1.5rem;">
+        Antik Lusitanya savaşçılarından krallığın doğuşuna, İberya'nın kaderini değiştiren meydan muharebelerinden okyanusları fetheden Keşifler Çağı'na ve silahlara karanfillerin takıldığı barışçıl demokrasi devrimine uzanan 900 yıllık bağımsızlık destanı.
+      </p>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="#onemli-savaslar" class="btn btn-primary">⚔️ Önemli Savaşlar</a>
+        <a href="#kronoloji" class="btn btn-secondary">⏳ Kronolojik Tarihçe</a>
+        <a href="#tarihi-bilgiler" class="btn btn-gold">📜 Tarihi İlginç Bilgiler</a>
+        <a href="#tarihi-kisiler" class="btn btn-primary">👑 Önemli Şahsiyetler</a>
+      </div>
+    </div>
+
+    <!-- ===================================================================
+         BÖLÜM 1: PORTEKİZ TARİHİNİN EN ÖNEMLİ SAVAŞLARI
+         =================================================================== -->
+    <div id="onemli-savaslar" class="section-header" style="margin-bottom: 2rem;">
+      <span class="section-subtitle">1. Aşama</span>
+      <h2 class="section-title">Portekiz Tarihini Şekillendiren Önemli Savaşlar</h2>
+      <p class="section-desc">
+        Portekiz ulusunun bağımsızlığını kanıtladığı, sınırlarını koruduğu ve dünya tarihinin seyrini değiştirdiği kritik meydan muharebeleri.
+      </p>
+    </div>
+
+    <!-- Savaş 1: Ourique Muharebesi (1139) -->
+    <div class="hist-card">
+      <div class="hist-content-grid">
+        <div>
+          <span class="hist-badge" style="background: rgba(4,106,56,0.2); color: var(--pt-green-light);">⚔️ Krallığın Doğduğu Muharebe</span>
+          <h3 class="hist-card-title">Ourique Muharebesi (1139)</h3>
+          <p class="hist-card-desc">
+            25 Temmuz 1139'da gerçekleşen <strong>Ourique Muharebesi</strong>, Portekiz ulusunun doğuş anı olarak kabul edilir. Kont <strong>Afonso Henriques</strong>, Alentejo bölgesinde sayıca kat kat üstün olan <strong>5 Mağribi (Müslüman) kralının birleşik ordusunu</strong> mucizevi bir taktikle kesin bir hezimete uğratmıştır.
+          </p>
+          <p class="hist-card-desc">
+            Bu tarihi zaferin ardından askerleri Afonso Henriques'i kalkanlarının üzerinde havaya kaldırarak ilk <strong>"Portekiz Kralı (I. Afonso)"</strong> ilan etmiştir. Portekiz Bayrağı'nın merkezindeki <strong>5 Mavi Kalkan (Quinas)</strong>, bu savaşta yenilgiye uğratılan 5 kralı simgeler.
+          </p>
+          <div class="hist-stats-row">
+            <div class="hist-stat-pill" style="border-left-color: var(--pt-green);">
+              <div class="hist-stat-label">TARİH</div>
+              <div class="hist-stat-val">25 Temmuz 1139</div>
+            </div>
+            <div class="hist-stat-pill" style="border-left-color: var(--pt-gold);">
+              <div class="hist-stat-label">SONUÇ</div>
+              <div class="hist-stat-val">Portekiz Krallığı Doğdu</div>
+            </div>
+            <div class="hist-stat-pill" style="border-left-color: var(--pt-red);">
+              <div class="hist-stat-label">BAYRAKTAKİ İZİ</div>
+              <div class="hist-stat-val">5 Mavi Kalkan (Quinas)</div>
+            </div>
+          </div>
+        </div>
+        <div class="hist-img-wrap">
+          <img src="assets/images/battle-ourique.jpg" alt="Ourique Muharebesi - Kral Afonso Henriques" class="hist-img geo-img" title="Büyütmek için tıklayınız">
+        </div>
+      </div>
+    </div>
+
+    <!-- Savaş 2: Aljubarrota Muharebesi (1385) -->
+    <div class="hist-card">
+      <div class="hist-content-grid reverse">
+        <div>
+          <span class="hist-badge" style="background: rgba(218,41,28,0.2); color: #ff6b6b;">🛡️ Bağımsızlığın Kurtuluş Savaşı</span>
+          <h3 class="hist-card-title">Aljubarrota Muharebesi (1385)</h3>
+          <p class="hist-card-desc">
+            14 Ağustos 1385'te Portekiz, tarihinin en büyük bağımsızlık sınavını verdi. Kastilya (İspanya) Kralı I. Juan, Portekiz tahtını ele geçirmek için 31.000 kişilik dev bir orduyla Lizbon'a yürüdü. Portekiz Kralı <strong>I. João</strong> ve dahi komutanı <strong>Nuno Álvares Pereira</strong>, müttefik İngiliz okçularıyla birlikte yalnızca 6.500 askere sahipti.
+          </p>
+          <p class="hist-card-desc">
+            Dahi bir kare savunma taktiğiyle Kastilya süvarileri bataklık hendeklere çekilerek 1 saat içinde bozguna uğratıldı. Portekiz, İspanyol boyunduruğundan kurtuldu. Kral I. João, Tanrı'ya şükran için bugün UNESCO Mirası olan ünlü <strong>Batalha Manastırı</strong>'nı inşa ettirdi.
+          </p>
+          <div class="hist-stats-row">
+            <div class="hist-stat-pill" style="border-left-color: var(--pt-red);">
+              <div class="hist-stat-label">TARİH</div>
+              <div class="hist-stat-val">14 Ağustos 1385</div>
+            </div>
+            <div class="hist-stat-pill" style="border-left-color: var(--pt-gold);">
+              <div class="hist-stat-label">RAKİP</div>
+              <div class="hist-stat-val">Kastilya Krallığı (İspanya)</div>
+            </div>
+            <div class="hist-stat-pill" style="border-left-color: var(--pt-green);">
+              <div class="hist-stat-label">MİRAS</div>
+              <div class="hist-stat-val">Batalha Zafer Manastırı</div>
+            </div>
+          </div>
+        </div>
+        <div class="hist-img-wrap">
+          <img src="assets/images/battle-aljubarrota.jpg" alt="Aljubarrota Muharebesi Minyatürü" class="hist-img geo-img" title="Büyütmek için tıklayınız">
+        </div>
+      </div>
+    </div>
+
+    <!-- Savaş 3: Diğer Önemli Tarihi Muharebeler Grid -->
+    <div class="culture-grid" style="margin-bottom: 3.5rem;">
+      <div class="culture-card">
+        <div class="culture-body">
+          <span class="culture-tag">1578 Trajedisi</span>
+          <h3 class="culture-title">Alcácer Quibir (Üç Kral Savaşı)</h3>
+          <p class="culture-text">
+            Fas çöllerinde yapılan savaşta genç Portekiz Kralı I. Sebastião ve tüm ordusu kayboldu. Varis kalmayınca Portekiz 60 yıl boyunca İspanya Kralı II. Felipe'nin hakimiyetine (İber Birliği) girdi.
+          </p>
+        </div>
+      </div>
+
+      <div class="culture-card">
+        <div class="culture-body">
+          <span class="culture-tag">1640 – 1668</span>
+          <h3 class="culture-title">Restorasyon Savaşı (Guerra da Restauração)</h3>
+          <p class="culture-text">
+            İspanyol boyunduruğuna karşı başlatılan ulusal ayaklanma 28 yıl sürdü. IV. João tahta çıkarak Bragança Hanedanı'nı kurdu ve Lizbon Antlaşması ile Portekiz'in tam bağımsızlığı İspanya'ya kabul ettirildi.
+          </p>
+        </div>
+      </div>
+
+      <div class="culture-card">
+        <div class="culture-body">
+          <span class="culture-tag">1807 – 1814</span>
+          <h3 class="culture-title">Yarımada Savaşı & Napolyon İstilaları</h3>
+          <p class="culture-text">
+            Napolyon Bonapart, İngiltere ile ticaretini kesmeyen Portekiz'i 3 kez işgal etti. Kraliyet ailesi donanmayla Brezilya'ya taşındı. Torres Vedras savunma hatlarıyla Fransız orduları geri püskürtüldü.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================================================================
+         BÖLÜM 2: KRONOLOJİK TARİHÇE (EN ESKİDEN YENİYE)
+         =================================================================== -->
+    <div id="kronoloji" class="section-header" style="margin-bottom: 2rem;">
+      <span class="section-subtitle">2. Aşama</span>
+      <h2 class="section-title">En Eskiden Yeniye: Kronolojik Portekiz Tarihçesi</h2>
+      <p class="section-desc">
+        Binlerce yıllık kadim geçmişten günümüz modern Avrupa demokrasisine uzanan adım adım tarih serüveni.
+      </p>
+    </div>
+
+    <div class="timeline-container">
+      
+      <!-- 1. Antik Çağ & Roma -->
+      <div class="timeline-item">
+        <div class="timeline-marker">🏛️</div>
+        <div class="timeline-box">
+          <span class="timeline-epoch-badge">M.Ö. 2. Yüzyıl – M.S. 5. Yüzyıl</span>
+          <h3 class="timeline-title">Antik Lusitanya & Roma Hakimiyeti</h3>
+          <p class="timeline-desc">
+            İber Yarımadası'nın batısında yaşayan savaşçı <strong>Lusitanyalılar</strong>, efsanevi liderleri <strong>Viriathus</strong> önderliğinde Roma lejyonlarına yıllarca direndi. Roma hakimiyetiyle birlikte bölgeye Latin dili (Portekizce'nin kökeni), taş yollar, su kemerleri ve zeytincilik kültürü yerleşti.
+          </p>
+        </div>
+      </div>
+
+      <!-- 2. Endülüs ve Mağribi Dönemi -->
+      <div class="timeline-item">
+        <div class="timeline-marker">🌙</div>
+        <div class="timeline-box">
+          <span class="timeline-epoch-badge">711 – 1139</span>
+          <h3 class="timeline-title">Endülüs & Mağribi (İslam) Dönemi</h3>
+          <p class="timeline-desc">
+            Tarık bin Ziyad'ın İberya'ya geçmesiyle Portekiz toprakları 400 yılı aşkın süre Endülüs medeniyetinin parçası oldu. Güneydeki "Algarve" (El-Garb / Batı) başta olmak üzere sulama kanalları, narenciye tarımı, mimari çiniler (Azulejos) ve Portekizce'ye 1.000'den fazla Arapça kelime miras kaldı.
+          </p>
+        </div>
+      </div>
+
+      <!-- 3. Krallığın Doğuşu ve Reconquista -->
+      <div class="timeline-item">
+        <div class="timeline-marker">👑</div>
+        <div class="timeline-box">
+          <span class="timeline-epoch-badge">1139 – 1249</span>
+          <h3 class="timeline-title">Portekiz Krallığı'nın Doğuşu & Reconquista</h3>
+          <p class="timeline-desc">
+            1139 Ourique zaferiyle I. Afonso Henriques bağımsızlığını ilan etti. 1147'de Haçlıların desteğiyle Lizbon fethedildi. 1249'da güneydeki Algarve'nin alınmasıyla Reconquista (Yeniden Fetih) tamamlandı ve <strong>Avrupa'da bugünkü sınırlarına en erken ulaşan ülke</strong> oldu.
+          </p>
+        </div>
+      </div>
+
+      <!-- 4. Coğrafi Keşifler Çağı -->
+      <div class="timeline-item">
+        <div class="timeline-marker">🧭</div>
+        <div class="timeline-box">
+          <span class="timeline-epoch-badge">1415 – 1580</span>
+          <h3 class="timeline-title">Büyük Coğrafi Keşifler Çağı (İmparatorluğun Altın Çağı)</h3>
+          <p class="timeline-desc">
+            Denizci Henrique'nin başlattığı keşif hamlesi dünyayı değiştirdi:
+          </p>
+          <ul style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem; padding-left: 1.25rem; line-height: 1.7;">
+            <li><strong>1415:</strong> Kuzey Afrika'da Ceuta'nın fethiyle keşifler başladı.</li>
+            <li><strong>1488:</strong> Bartolomeu Dias Afrika'nın güney ucunu (Ümit Burnu) aştı.</li>
+            <li><strong>1498:</strong> Vasco da Gama deniz yoluyla doğrudan Hindistan'a ulaştı.</li>
+            <li><strong>1500:</strong> Pedro Álvares Cabral Brezilya kıyılarına ayak bastı.</li>
+          </ul>
+          <div style="margin-top: 1rem; border-radius: var(--radius-sm); overflow: hidden; height: 220px;">
+            <img src="assets/images/discoveries-monument.jpg" alt="Keşifler Anıtı - Belém Lizbon" style="width: 100%; height: 100%; object-fit: cover;" class="geo-img" title="Büyütmek için tıklayınız">
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. 1755 Büyük Lizbon Depremi -->
+      <div class="timeline-item">
+        <div class="timeline-marker">⚡</div>
+        <div class="timeline-box">
+          <span class="timeline-epoch-badge">1 Kasım 1755</span>
+          <h3 class="timeline-title">1755 Büyük Lizbon Depremi & Pombal Dönemi</h3>
+          <p class="timeline-desc">
+            1 Kasım Tüm Azizler Günü'nde meydana gelen <strong>8.7 büyüklüğündeki dev deprem</strong>, ardından gelen 15 metrelik tsunami ve 5 gün süren yangınlar Lizbon'un %85'ini yerle bir etti. Başbakan <strong>Markiz de Pombal</strong> tarihe geçen şu emri verdi: <em>"Ölüleri gömün, yaşayanları doyurun!"</em>. Lizbon, dünyanın ilk depreme dayanıklı ızgara planlı modern kenti (Baixa Pombalina) olarak küllerinden yeniden doğdu.
+          </p>
+          <div style="margin-top: 1rem; border-radius: var(--radius-sm); overflow: hidden; height: 220px;">
+            <img src="assets/images/lisbon-earthquake-1755.jpg" alt="1755 Lizbon Depremi ve Tsunami Gravürü" style="width: 100%; height: 100%; object-fit: cover;" class="geo-img" title="Büyütmek için tıklayınız">
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. 1910 Cumhuriyet Devrimi -->
+      <div class="timeline-item">
+        <div class="timeline-marker">🇵🇹</div>
+        <div class="timeline-box">
+          <span class="timeline-epoch-badge">5 Ekim 1910</span>
+          <h3 class="timeline-title">Cumhuriyet Devrimi (Monarşinin Yıkılışı)</h3>
+          <p class="timeline-desc">
+            Halk ayaklanması ve donanma desteğiyle 800 yıllık Portekiz Monarşisi devrildi ve <strong>Birinci Portekiz Cumhuriyeti</strong> kuruldu. Kraliyetin mavi-beyaz bayrağı kaldırılarak bugünkü yeşil-kırmızı ulusal bayrak kabul edildi.
+          </p>
+        </div>
+      </div>
+
+      <!-- 7. Karanfil Devrimi (1974) -->
+      <div class="timeline-item">
+        <div class="timeline-marker">🌺</div>
+        <div class="timeline-box">
+          <span class="timeline-epoch-badge">25 Nisan 1974</span>
+          <h3 class="timeline-title">Karanfil Devrimi (Revolução dos Cravos)</h3>
+          <p class="timeline-desc">
+            48 yıl süren António de Oliveira Salazar'ın otoriter diktatörlük rejimi (Estado Novo), genç subayların (MFA) başlattığı kansız askeri darbeyle devrildi. Sokaklara dökülen halk, askerlerin tüfeklerinin namlularına <strong>kırmızı karanfiller</strong> taktı. Tek bir kurşun sıkılmadan tam demokrasiye geçildi, sömürgelere bağımsızlık verildi.
+          </p>
+          <div style="margin-top: 1rem; border-radius: var(--radius-sm); overflow: hidden; height: 220px;">
+            <img src="assets/images/carnation-revolution.jpg" alt="1974 Karanfil Devrimi - Lizbon Halkı ve Askerler" style="width: 100%; height: 100%; object-fit: cover;" class="geo-img" title="Büyütmek için tıklayınız">
+          </div>
+        </div>
+      </div>
+
+      <!-- 8. Modern Portekiz -->
+      <div class="timeline-item">
+        <div class="timeline-marker">🇪🇺</div>
+        <div class="timeline-box">
+          <span class="timeline-epoch-badge">1986 – Günümüz</span>
+          <h3 class="timeline-title">Avrupa Birliği Üyeliği ve Modern Çağ</h3>
+          <p class="timeline-desc">
+            1986'da Avrupa Topluluğu'na (AB) katılan Portekiz, 2002'de Euro para birimine geçti. Günümüzde dünyanın en güvenli ilk 10 ülkesi arasında yer almakta; teknoloji, turizm, sürdürülebilir yeşil enerji ve küresel diplomaside öncü rol oynamaktadır.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ===================================================================
+         BÖLÜM 3: TARİHE DAİR İLGİNÇ VE ŞAŞIRTICI BİLGİLER
+         =================================================================== -->
+    <div id="tarihi-bilgiler" class="section-header" style="margin-bottom: 2rem;">
+      <span class="section-subtitle">3. Aşama</span>
+      <h2 class="section-title">Portekiz Tarihine Dair Büyüleyici Gerçekler</h2>
+      <p class="section-desc">
+        Dünya tarihini derinden etkileyen ve çoğu kişinin bilmediği tarihi kayıtlar.
+      </p>
+    </div>
+
+    <div class="facts-grid" style="margin-bottom: 3.5rem;">
+      <div class="fact-card">
+        <div class="fact-icon">🗺️</div>
+        <div class="fact-label">Değişmeyen Sınırlar</div>
+        <div class="fact-value">720+ Yıl</div>
+        <div class="fact-note">1297 Alcañices Antlaşması'ndan bu yana anakara sınırları Avrupa'nın en eski ve bozulmamış sınırıdır.</div>
+      </div>
+
+      <div class="fact-card">
+        <div class="fact-icon">🤝</div>
+        <div class="fact-label">Dünyanın En Eski İttifakı</div>
+        <div class="fact-value">1386 Windsor</div>
+        <div class="fact-note">İngiltere ile 1386'da imzalanan Windsor İttifakı, dünyada bugün hâlâ geçerli olan en eski askeri paktır.</div>
+      </div>
+
+      <div class="fact-card">
+        <div class="fact-icon">🌐</div>
+        <div class="fact-label">Dünyayı İkiye Bölen Pakt</div>
+        <div class="fact-value">Tordesillas (1494)</div>
+        <div class="fact-note">Papa arabuluculuğunda Portekiz ve İspanya, keşfedilen ve keşfedilecek tüm dünyayı aralarında ikiye böldü.</div>
+      </div>
+
+      <div class="fact-card">
+        <div class="fact-icon">🌍</div>
+        <div class="fact-label">İlk Küresel İmparatorluk</div>
+        <div class="fact-value">4 Kıtada Güç</div>
+        <div class="fact-note">Brezilya'dan Afrika'ya, Hindistan'dan (Goa) Çin'e (Makao) kadar tarihteki ilk küresel deniz ticaret ağını kurdu.</div>
+      </div>
+
+      <div class="fact-card">
+        <div class="fact-icon">📚</div>
+        <div class="fact-label">Dünyanın En Eski Kitapçısı</div>
+        <div class="fact-value">Livraria Bertrand (1732)</div>
+        <div class="fact-note">Lizbon'da 1732'de açılan ve Guinness Rekorlar Kitabı'na giren dünyanın en eski faal kitapçısıdır.</div>
+      </div>
+
+      <div class="fact-card">
+        <div class="fact-icon">🌺</div>
+        <div class="fact-label">Kansız Devrim</div>
+        <div class="fact-value">Karanfil Devrimi</div>
+        <div class="fact-note">1974'te 48 yıllık faşist diktatörlük, askerlerin silahlarına karanfil takılmasıyla kansız şekilde devrildi.</div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ===================================================================
+       ALT BİLGİ (FOOTER)
+       =================================================================== -->
+  <footer class="main-footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <img src="assets/images/flag-of-portugal.svg" alt="Portekiz Bayrağı" class="logo-flag-icon">
+        <span class="logo-text" style="font-size: 1.1rem;">PORTUGAL</span>
+      </div>
+      <p class="footer-text">
+        © 2026 Portekiz Tanıtım Portalı. 2. Hafta: Tarih Bölümü.
+      </p>
+      <ul class="footer-quick-links">
+        <li><a href="index.html">Ana Sayfa</a></li>
+        <li><a href="cografya.html">Coğrafya</a></li>
+        <li><a href="tarih.html">Tarih</a></li>
+        <li><a href="kultur.html">Kültür</a></li>
+        <li><a href="turizm.html">Turizm</a></li>
+        <li><a href="#onemli-savaslar">Önemli Savaşlar</a></li>
+        <li><a href="#kronoloji">Kronoloji</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
